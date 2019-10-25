@@ -9,6 +9,7 @@ const axios = require('axios');
 
 require('./models/User');
 require('./models/Explanation');
+require('./models/Word');
 require('./services/passportConfig');
 mongoose.connect(keys.mongo.URL, {useNewUrlParser: true});
 

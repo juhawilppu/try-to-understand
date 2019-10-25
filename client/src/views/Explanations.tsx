@@ -1,16 +1,6 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import axios from 'axios';
-import { Button } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import SendIcon from '@material-ui/icons/Send';
-import CancelIcon from '@material-ui/icons/Cancel';
-
-const styles = {
-    leftIcon: {
-        marginRight: '10px'
-    }
-}
 
 interface Props extends RouteComponentProps {
 

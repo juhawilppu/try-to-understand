@@ -11,6 +11,8 @@ import Explain from './views/Explain';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Center from './views/Center';
 import Explanations from './views/Explanations';
+import Admin from './views/Admin';
+import AdminAddWord from './views/AdminAddWord';
 
 const theme = createMuiTheme({
   palette: {
@@ -59,6 +61,8 @@ class App extends Component<Props> {
               <Route path="/explain" exact component={Explain} />
               <Route path="/understand" exact component={Explain} />
               <Route path="/explanations" exact component={Explanations} />
+              <Route path="/admin" exact component={Admin} />
+              <Route path="/admin/add-word" exact component={AdminAddWord} />
             </React.Fragment>
           )
     }
