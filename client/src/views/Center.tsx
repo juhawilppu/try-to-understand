@@ -42,17 +42,10 @@ class Dashboard extends React.Component<Props, State> {
         });
     }
 
-    deleteMessage = async (messageId : string) => {
-        const message = this.state.messages.find(m => m._id === messageId) as IMessage;
-        await axios.delete(`/api/messages/${message._id}`);
-        const messages = this.state.messages.filter(m => m._id !== messageId);
-        this.setState({messages});
-    }
-
     render() {
 
         const content = this.state.loaded ? (
-            <div>
+            <div className="list">
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/explain`)}>
                     <PlusIcon style={styles.leftIcon} /> Explain
                 </Button>
@@ -73,7 +66,7 @@ class Dashboard extends React.Component<Props, State> {
         )
 
         return (
-            <div style={{width: '500px'}}>
+            <div style={{width: '500px'}} className="center-page">
                 <h2>Explain Center</h2>
                 {content}
             </div>

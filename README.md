@@ -52,12 +52,22 @@ heroku create
 Heroku is now configured.
 
 ## Running locally
-Remember to [configure Google OAuth](#how-to-configure-google-oauth) first.
 
+You need to install Docker first
+
+Start local database
+```
+docker-compose up
+```
+
+Start development
 ```
 git clone git@github.com:juhawilppu/node-google-oauth.git
 cd node-google-oauth
 npm install
+cd client
+npm install
+cd ..
 npm run dev
 ```
 

@@ -16,6 +16,10 @@ class NewMessage extends React.Component<Props, State> {
     }
 
     componentDidMount() {
+        this.load();
+    }
+
+    load = () => {
         axios.get('/api/words').then(response => {
             this.setState({ loaded: true, words: response.data });
         }).catch(error => alert(error));
@@ -23,6 +27,12 @@ class NewMessage extends React.Component<Props, State> {
 
     gotoAddWord = () => {
         this.props.history.push(`/admin/add-word`);
+    }
+
+    delete = (id) => {
+        axios.delete(`/api/words/${id}`).then(response => {
+            this.load();
+        });
     }
 
     render() {
@@ -35,14 +45,16 @@ class NewMessage extends React.Component<Props, State> {
                             <th>English</th>
                             <th>French</th>
                             <th>Finnish</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.loaded && this.state.words.map((exp : any) => 
-                            <tr>
+                            <tr key={exp._id}>
                                 <td>{exp.english}</td>
                                 <td>{exp.french}</td>
                                 <td>{exp.finnish}</td>
+                                <td><button onClick={() => this.delete(exp._id)}>Delete</button></td>
                             </tr>
                         )}
                     </tbody>

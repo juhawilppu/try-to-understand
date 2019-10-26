@@ -5,6 +5,7 @@ const explanationSchema = new Schema({
     explanation: String,
     word: String,
     language: String,
+    downvotes: Number,
     sent: Date,
     user: {
         id: String,

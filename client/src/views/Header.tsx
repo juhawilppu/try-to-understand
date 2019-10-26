@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import Logo from '../common/Logo';
 
 const theme = createMuiTheme({
     overrides: {
@@ -55,7 +56,7 @@ class Header extends React.Component<Props> {
         return (
             <div className="header">
                 <span className="product-name" onClick={this.gotoCenter}>
-                    DontLetMeBeMisunderstood
+                    <Logo />
                 </span>
                 <span className="profile">
                     {this.renderContent()}

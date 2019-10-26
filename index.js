@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
-const axios = require('axios');
 
 require('./models/User');
 require('./models/Explanation');
 require('./models/Word');
+require('./models/Understand');
 require('./services/passportConfig');
 mongoose.connect(keys.mongo.URL, {useNewUrlParser: true});
 

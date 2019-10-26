@@ -14,7 +14,7 @@ code {
 }
 
 .header {
-  background: #42A5F5;
+  background: #607D8B;
   color: white;
 
   display: flex;
@@ -52,4 +52,22 @@ code {
 
 .explain-view .time-remaining {
   margin-top: 20px;
+}
+
+.explain-view .guess {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.center-page {
+
+}
+
+.center-page .list {
+  display: flex;
+  flex-direction: column;
+}
+
+table th {
+  text-align: left;
 }
