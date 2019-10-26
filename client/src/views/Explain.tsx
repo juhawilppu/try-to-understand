@@ -16,20 +16,25 @@ interface Props extends RouteComponentProps {
 
 }
 interface State {
+    loaded: boolean;
     content: string;
     time: number;
+    assignment: any;
 }
 class NewMessage extends React.Component<Props, State> {
     state = {
-        wordToExplain: {
-            english: 'dog',
-            french: 'chien'
-        },
+        loaded: false,
+        assignment: null,
         content: '',
         time: 60
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
+        const response = await axios.get('/api/assignment');
+        this.setState({ loaded: true, assignment: response.data }, this.startTimer);
+    }
+
+    startTimer = () => {
         const timer = setInterval(() => {
             const time = this.state.time - 1;
             this.setState({ time });
@@ -39,8 +44,8 @@ class NewMessage extends React.Component<Props, State> {
     sendMessage = async () => {
         const dto = {
             explanation: this.state.content,
-            word: this.state.wordToExplain.english,
-            language: 'french'
+            word: this.state.assignment.word.english,
+            language: this.state.assignment.language
         }
         const response = await axios.post('/api/explanations', dto) as any;
         this.props.history.push(`/center`);
@@ -51,18 +56,27 @@ class NewMessage extends React.Component<Props, State> {
     }
 
     render() {
+
+        if (!this.state.loaded) {
+            return (
+                <div style={{width: '500px'}} className="explain-view">
+                    <h2>Explain</h2>
+                </div>
+            )
+        }
+
         return (
             <div style={{width: '500px'}} className="explain-view">
                 <h2>Explain</h2>
                 <div>
                     <div className="header-for-word">
-                        Please explain this word
+                        Please explain
                     </div>
                     <div className="word-to-explain">
-                        {this.state.wordToExplain.french} ({this.state.wordToExplain.english})
+                        {this.state.assignment.word[this.state.assignment.language]} ({this.state.assignment.word.english})
                     </div>
                     <div className="header-for-word">
-                        in French
+                        in {this.state.assignment.languageUi}
                     </div>
                 </div>
                 <div className="time-remaining">
@@ -77,7 +91,7 @@ class NewMessage extends React.Component<Props, State> {
                     <form noValidate autoComplete="off">
                         <TextField
                             id="standard-title"
-                            label="Explanation in French"
+                            label={`Explanation in ${this.state.assignment.languageUi}`}
                             variant="outlined"
                             multiline
                             rows="6"

@@ -41,12 +41,13 @@ code {
 
 .explain-view .header-for-word {
   font-size: 15px;
-  margin-bottom: 5px;
 }
 
 .explain-view .word-to-explain {
   font-size: 20px;
   font-weight: bold;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 
 .explain-view .time-remaining {

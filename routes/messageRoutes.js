@@ -6,6 +6,26 @@ const requireLogin = require('../middlewares/requireLogin');
 module.exports = (app) => {
 
     app.get(
+        '/api/assignment',
+        requireLogin,
+        async (req, res) => {
+            const words = await Word.find();
+            function random(mn, mx) {  
+                return Math.random() * (mx - mn) + mn;  
+            } 
+            const word = words[Math.floor(random(0, words.length))];
+
+            const assignment = {
+                word,
+                language: 'french',
+                languageUi: 'French'
+            }
+
+            res.send(assignment);
+        }
+    );
+
+    app.get(
         '/api/words',
         requireLogin,
         async (req, res) => {
