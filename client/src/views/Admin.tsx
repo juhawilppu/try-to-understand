@@ -20,7 +20,7 @@ class NewMessage extends React.Component<Props, State> {
     }
 
     load = () => {
-        axios.get('/api/words').then(response => {
+        axios.get('/api/admin/words').then(response => {
             this.setState({ loaded: true, words: response.data });
         }).catch(error => alert(error));
     }
@@ -30,7 +30,7 @@ class NewMessage extends React.Component<Props, State> {
     }
 
     delete = (id) => {
-        axios.delete(`/api/words/${id}`).then(response => {
+        axios.delete(`/api/admin/words/${id}`).then(response => {
             this.load();
         });
     }

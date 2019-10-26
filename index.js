@@ -14,7 +14,7 @@ const sequelize = new Sequelize(keys.postgres.database, keys.postgres.username, 
         underscored: true,
         paranoid: true
     },
-    force: true // This will DROP tables and rebuild schema
+    //force: true // This will DROP tables and rebuild schema
 });
 
 app.use(
@@ -34,7 +34,9 @@ require('./models/Guess')(sequelize);
 require('./models/Explanation')(sequelize);
 
 require('./routes/authRoutes')(app);
-require('./routes/messageRoutes')(app, sequelize);
+require('./routes/explainRoutes')(app, sequelize);
+require('./routes/guessRoutes')(app, sequelize);
+require('./routes/adminRoutes')(app, sequelize);
 
 require('./services/passportConfig')(app, sequelize);
 
@@ -52,5 +54,16 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT || 5000;
 
 sequelize.sync().then(() => {
+
+    /*
+    const message = sequelize.models.Word.build({
+        english: 'dog',
+        french: 'chien',
+        finnish: 'koira',
+        swedish: 'hund',
+        userId: 0
+    }).save();
+    */
+
     app.listen(PORT)
 });

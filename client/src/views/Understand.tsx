@@ -44,7 +44,7 @@ class NewMessage extends React.Component<Props, State> {
             assignmentId: this.state.understand._id,
             guess: this.state.content
         }
-        const response = await axios.post('/api/understand', dto) as any;
+        const response = await axios.post('/api/guess', dto) as any;
 
         this.setState({ answered: true, correct: response.data.correct, correctAnswer: response.data.correctAnswer });
     }
@@ -61,13 +61,13 @@ class NewMessage extends React.Component<Props, State> {
     )
 
     report = () => {
-        axios.post('/api/understand/report/' + this.state.understand._id);
+        axios.post('/api/guess/report/' + this.state.understand._id);
         this.next();
     }
 
     next = async () => {
         try {
-            const response = await axios.get('/api/understand');
+            const response = await axios.get('/api/guess');
             this.setState({ loaded: true, understand: response.data, answered: false, content: '' });
         } catch (error) {
             this.setState({ error })
