@@ -19,12 +19,14 @@ interface State {
     english: string;
     french: string;
     finnish: string;
+    swedish: string;
 }
 class NewMessage extends React.Component<Props, State> {
     state = {
         english: '',
         french: '',
-        finnish: ''
+        finnish: '',
+        swedish: ''
     }
 
     sendMessage = async () => {
@@ -48,7 +50,7 @@ class NewMessage extends React.Component<Props, State> {
                 <h2>Explain</h2>
                 <div style={{marginTop: '50px'}}>
                     <form noValidate autoComplete="off">
-                        {['english', 'french', 'finnish'].map((lang: any) => (
+                        {['english', 'french', 'finnish', 'swedish'].map((lang: any) => (
                             <TextField
                                 id="standard-title"
                                 label={lang}

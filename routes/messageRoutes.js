@@ -1,16 +1,16 @@
-const mongoose = require('mongoose');
-const Explanation = mongoose.model('explanations');
-const Word = mongoose.model('words');
-const Understand = mongoose.model('understands');
 const requireLogin = require('../middlewares/requireLogin');
 
-module.exports = (app) => {
+module.exports = (app, sequelize) => {
 
     app.get(
         '/api/understand',
         requireLogin,
         async (req, res) => {
-            const explanations = await Explanation.find({ downvotes: null });
+            const explanations = await sequelize.models.Explanation.findAll({
+                where: {
+                    downvotes
+                }
+            })
 
             if (explanations.length === 0) {
                 res.send(null, 404);
@@ -29,17 +29,13 @@ module.exports = (app) => {
         requireLogin,
         async (req, res) => {
 
-            const explanation = await Explanation.findById(req.body.assignmentId);
+            const explanation = await sequelize.models.Explanation.findByPk(req.body.assignmentId);
 
-            const message = await new Understand({
+            const message = await sequelize.models.Guess.build({
                 assignmentId: explanation.id,
                 guess: req.body.guess,
                 correct: explanation.word === req.body.guess,
-                user: {
-                    userId: req.user.id,
-                    email: req.user.email
-                },
-                created: Date.now()
+                user_id: req.user.id
             }).save();
             res.send({
                 correct: message.correct,
@@ -54,7 +50,7 @@ module.exports = (app) => {
         async (req, res) => {
 
             console.log('downvoting ' + req.params.id)
-            const explanation = await Explanation.findById(req.params.id);
+            const explanation = await sequelize.models.Explanation.findByPk(req.params.id);
             explanation.downvotes = 1;
             explanation.save();
 
@@ -68,7 +64,11 @@ module.exports = (app) => {
         '/api/assignment',
         requireLogin,
         async (req, res) => {
-            const words = await Word.find();
+            const words = await sequelize.models.Word.findAll();
+            if (words.length === 0) {
+                return res.send(null, 404);
+            }
+
             function random(mn, mx) {
                 return Math.random() * (mx - mn) + mn;  
             } 
@@ -88,7 +88,7 @@ module.exports = (app) => {
         '/api/words',
         requireLogin,
         async (req, res) => {
-            const words = await Word.find();
+            const words = await sequelize.models.Word.findAll();
             res.send(words);
         }
     );
@@ -97,15 +97,12 @@ module.exports = (app) => {
         '/api/words',
         requireLogin,
         async (req, res) => {
-            const message = await new Word({
+            const message = await sequelize.models.Word.build({
                 english: req.body.english,
                 french: req.body.french,
                 finnish: req.body.finnish,
-                user: {
-                    userId: req.user.id,
-                    email: req.user.email
-                },
-                created: Date.now()
+                swedish: req.body.swedish,
+                user_id: req.user.id
             }).save();
             res.send(message);
         }
@@ -125,7 +122,11 @@ module.exports = (app) => {
         '/api/explanations',
         requireLogin,
         async (req, res) => {
-            const messages = await Explanation.find({ "user.id": req.user.id });
+            const messages = await sequelize.models.Explanation.findAll({
+                where: {
+                    user_id: req.user.id
+                }
+            })
 
             res.send(messages);
         }
@@ -135,17 +136,12 @@ module.exports = (app) => {
         '/api/explanations',
         requireLogin,
         async (req, res) => {
-            const message = await new Explanation({
+            const message = await sequelize.models.Explanation.build({
                 explanation: req.body.explanation,
                 word: req.body.word,
                 language: req.body.language,
-                user: {
-                    id: req.user.id,
-                    email: req.user.email
-                },
-                sent: Date.now()
+                user_id: req.user.id
             }).save();
-
             res.send(message);
         }
     );

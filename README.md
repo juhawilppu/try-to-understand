@@ -55,7 +55,7 @@ Heroku is now configured.
 
 You need to install Docker first
 
-Start local database
+Start local PostgreSQL
 ```
 docker-compose up
 ```
@@ -84,9 +84,8 @@ git push heroku master
 Go to https://limitless-ocean-63000.herokuapp.com/ or whatever is your Heroku application URL.
 
 ## Built with
-* [NodeJS](https://nodejs.org/en/), [express](https://expressjs.com/) and [mongoose](https://mongoosejs.com/).
+* [NodeJS](https://nodejs.org/en/) with [express](https://expressjs.com/)
 * [React](https://reactjs.org/), [Redux](https://redux.js.org/) and [TypeScript](https://www.typescriptlang.org/).
 * [Heroku](https://www.heroku.com).
 * [Google OAuth](https://developers.google.com/identity/protocols/OAuth2).
-* [MongoDB Atlas](https://cloud.mongodb.com).
-* [SendGrid](https://sendgrid.com/)
+* [PostgreSQL](https://www.postgresql.org/)

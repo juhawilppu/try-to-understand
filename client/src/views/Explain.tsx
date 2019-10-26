@@ -17,6 +17,7 @@ interface Props extends RouteComponentProps {
 }
 interface State {
     loaded: boolean;
+    error: any;
     content: string;
     time: number;
     assignment: any;
@@ -24,14 +25,19 @@ interface State {
 class NewMessage extends React.Component<Props, State> {
     state = {
         loaded: false,
+        error: null,
         assignment: null,
         content: '',
         time: 60
     }
 
     componentDidMount = async () => {
-        const response = await axios.get('/api/assignment');
-        this.setState({ loaded: true, assignment: response.data }, this.startTimer);
+        try {
+            const response = await axios.get('/api/assignment');
+            this.setState({ loaded: true, assignment: response.data }, this.startTimer);
+        } catch (error) {
+            this.setState({ error })
+        }
     }
 
     startTimer = () => {
@@ -44,7 +50,7 @@ class NewMessage extends React.Component<Props, State> {
     sendMessage = async () => {
         const dto = {
             explanation: this.state.content,
-            word: this.state.assignment.word.english,
+            word: this.state.assignment.word.id,
             language: this.state.assignment.language
         }
         const response = await axios.post('/api/explanations', dto) as any;
@@ -56,6 +62,15 @@ class NewMessage extends React.Component<Props, State> {
     }
 
     render() {
+
+        if (this.state.error) {
+            return (
+                <div style={{width: '500px'}} className="explain-view">
+                    <h2>Explain</h2>
+                    <div>Unexpected error. Possible no words created?</div>
+                </div>
+            )
+        }
 
         if (!this.state.loaded) {
             return (

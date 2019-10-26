@@ -1,10 +1,23 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const { Model, Sequelize } = require('sequelize');
 
-const userSchema = new Schema({
-    googleId: String,
-    email: String,
-    name: String
-});
-
-mongoose.model('users', userSchema);
+module.exports = (sequelize) => {
+    class User extends Model {}
+    User.init({
+        id: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        google_id: {
+            type: Sequelize.STRING(50)
+        },
+        email: {
+            type: Sequelize.STRING(50)
+        },
+        name: {
+            type: Sequelize.STRING(50)
+        }
+    }, {
+        sequelize
+    });
+}

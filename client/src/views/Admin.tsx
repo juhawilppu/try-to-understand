@@ -45,6 +45,7 @@ class NewMessage extends React.Component<Props, State> {
                             <th>English</th>
                             <th>French</th>
                             <th>Finnish</th>
+                            <th>Swedish</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -54,6 +55,7 @@ class NewMessage extends React.Component<Props, State> {
                                 <td>{exp.english}</td>
                                 <td>{exp.french}</td>
                                 <td>{exp.finnish}</td>
+                                <td>{exp.swedish}</td>
                                 <td><button onClick={() => this.delete(exp._id)}>Delete</button></td>
                             </tr>
                         )}

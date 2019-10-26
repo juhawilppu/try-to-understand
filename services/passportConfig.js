@@ -1,40 +1,51 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config/keys');
-const mongoose = require('mongoose');
-const User = mongoose.model('users');
 
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
+module.exports = (app, sequelize) => {
 
-passport.deserializeUser(async (id, done) => {
-    const user = await User.findById(id);
-    done(null, user);
-});
+    passport.serializeUser((user, done) => {
+        done(null, user.id);
+    });
 
-passport.use(
-    new GoogleStrategy(
-        {
-            clientID: keys.google.clientId,
-            clientSecret: keys.google.clientSecret,
-            callbackURL: '/auth/google/callback',
-            proxy: true
-        },
-        async (accessToken, refreshToken, profile, done) => {
-            const existingUser = await User.findOne({ googleId: profile.id });
-            if (existingUser) {
-                // We already have saved this customer to db
-                done(null, existingUser);
-            } else {
-                // New user. Save it to db.
-                const user = await new User({
-                    googleId: profile.id,
-                    email: profile._json.email,
-                    name: profile._json.name
-                }).save();
-                done(null, user);
+    passport.deserializeUser(async (id, done) => {
+        const user = await sequelize.models.User.findOne({
+            where: {
+                id
             }
-        }
-    )
-);
+        });
+        done(null, user);
+    });
+
+    passport.use(
+        new GoogleStrategy(
+            {
+                clientID: keys.google.clientId,
+                clientSecret: keys.google.clientSecret,
+                callbackURL: '/auth/google/callback',
+                proxy: true
+            },
+            async (accessToken, refreshToken, profile, done) => {
+                const existingUser = await sequelize.models.User.findOne({
+                    where: {
+                        google_id: profile.id
+                    }
+                })
+
+                if (existingUser) {
+                    // We already have saved this customer to db
+                    done(null, existingUser);
+                } else {
+                    // New user. Save it to db.
+                    const user = await sequelize.models.User.build({
+                        googleId: profile.id,
+                        email: profile._json.email,
+                        name: profile._json.name
+                    }).save();
+                    done(null, user);
+                }
+            }
+        )
+    );
+
+}

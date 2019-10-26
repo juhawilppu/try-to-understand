@@ -1,11 +1,29 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const { Model, Sequelize } = require('sequelize');
 
-const wordSchema = new Schema({
-    english: String,
-    french: String,
-    finnish: String,
-    created: Date
-});
-
-mongoose.model('words', wordSchema);
+module.exports = (sequelize) => {
+    class Word extends Model {}
+    Word.init({
+        id: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        english: {
+            type: Sequelize.STRING(256)
+        },
+        french: {
+            type: Sequelize.STRING(256)
+        },
+        finnish: {
+            type: Sequelize.STRING(256)
+        },
+        swedish: {
+            type: Sequelize.STRING(256)
+        },
+        user_id: {
+            type: Sequelize.INTEGER
+        }
+    }, {
+        sequelize
+    });
+}

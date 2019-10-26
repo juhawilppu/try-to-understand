@@ -1,24 +1,21 @@
 const { Model, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
-    class Explanation extends Model {}
-    Explanation.init({
+    class Guess extends Model {}
+    Guess.init({
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        explanation: {
-            type: Sequelize.STRING(50)
-        },
-        word_id: {
+        explanationId: {
             type: Sequelize.INTEGER
         },
-        language: {
+        guess: {
             type: Sequelize.STRING(50)
         },
-        downvotes: {
-            type: Sequelize.INTEGER
+        correct: {
+            type: Sequelize.BOOLEAN
         },
         sent: {
             type: Sequelize.DATE
