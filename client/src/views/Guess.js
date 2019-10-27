@@ -116,14 +116,17 @@ class Guess extends React.Component {
         }
 
         return (
-            <div style={{width: '500px'}} className="explain-view">
+            <div style={{width: '500px'}} className="guess-view">
                 <h2>Guess</h2>
                 <div>
                     <div className="header-for-word">
                         Guess what this is explaining
                     </div>
-                    <div className="guess">
+                    <div className="word">
                         {this.state.understand.explanation}
+                    </div>
+                    <div className="footer-for-word">
+                        as explained by user-{this.state.understand.user_id}
                     </div>
                 </div>
                 {this.state.answered ? <this.renderResult /> : <this.renderGuess />}

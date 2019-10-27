@@ -1,4 +1,6 @@
 const requireLogin = require('../middlewares/requireLogin');
+const Sequlize = require('sequelize');
+const Op = Sequlize.Op;
 
 module.exports = (app, sequelize) => {
 
@@ -6,15 +8,24 @@ module.exports = (app, sequelize) => {
         '/api/guess',
         requireLogin,
         async (req, res) => {
-            const explanations = await sequelize.models.Explanation.findAll();
+
+            // Get an explanation randomly from some user other than myself
+            const explanations = await sequelize.models.Explanation.findAll({
+                where: {
+                    user_id: {
+                        [Op.ne]: req.user.id
+                    }
+                }
+            });
 
             if (explanations.length === 0) {
-                res.send({ message: 'No explanations on server'}, 404);
+                res.send({ message: 'No explanations on server' }, 404);
             }
 
             function random(mn, mx) {
-                return Math.random() * (mx - mn) + mn;  
-            } 
+                return Math.random() * (mx - mn) + mn;
+            }
+
             const explanation = explanations[Math.floor(random(0, explanations.length))];
             res.send(explanation);
         }

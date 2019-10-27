@@ -44,19 +44,21 @@ code {
 }
 
 .explain-view .word-to-explain {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
-  margin-top: 7px;
-  margin-bottom: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .explain-view .time-remaining {
   margin-top: 20px;
 }
 
-.explain-view .guess {
-  font-size: 20px;
+
+.guess-view .word {
+  font-size: 30px;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .center-page {

@@ -35,7 +35,7 @@ class Header extends React.Component {
             default:
                 return (
                     <React.Fragment>
-                        <span style={{marginRight: '20px'}} onClick={this.gotoProfile}>{this.props.auth.email}</span>
+                        <span style={{marginRight: '20px'}} onClick={this.gotoProfile}>user-{this.props.auth.id}</span>
                         <MuiThemeProvider theme={theme}>
                             <Button color="primary" href="/api/logout">Logout</Button>
                         </MuiThemeProvider>
