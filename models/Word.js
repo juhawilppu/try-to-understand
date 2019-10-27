@@ -17,9 +17,6 @@ module.exports = (sequelize) => {
         finnish: {
             type: Sequelize.STRING(256)
         },
-        swedish: {
-            type: Sequelize.STRING(256)
-        },
         user_id: {
             type: Sequelize.INTEGER
         }

@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         email: {
             type: Sequelize.STRING(50)
         },
-        name: {
+        language: {
             type: Sequelize.STRING(50)
         }
     }, {

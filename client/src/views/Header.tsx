@@ -38,7 +38,7 @@ class Header extends React.Component<Props> {
             default:
                 return (
                     <React.Fragment>
-                        <span style={{marginRight: '20px'}}>{this.props.auth.email}</span>
+                        <span style={{marginRight: '20px'}} onClick={this.gotoProfile}>{this.props.auth.email}</span>
                         <MuiThemeProvider theme={theme}>
                             <Button color="primary" href="/api/logout">Logout</Button>
                         </MuiThemeProvider>
@@ -49,6 +49,10 @@ class Header extends React.Component<Props> {
 
     gotoCenter = () => {
         this.props.history.push(`/center`);
+    }
+
+    gotoProfile = () => {
+        this.props.history.push(`/user-profile`);
     }
 
     render() {
@@ -69,6 +73,5 @@ class Header extends React.Component<Props> {
 const mapStateToProps = (val : any) => {
     return { auth: val.auth };
 }
-
 
 export default withRouter(connect(mapStateToProps)(Header));

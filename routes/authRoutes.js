@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-module.exports = (app) => {
+module.exports = (app, sequelize) => {
     app.get(
         '/auth/google',
         passport.authenticate('google', {
@@ -22,6 +22,17 @@ module.exports = (app) => {
 
     app.get('/api/current_user', (req, res) => {
         res.send(req.user);
+    });
+
+    app.put('/api/current_user', async (req, res) => {
+        const user = await sequelize.models.User.findOne({
+            where: {
+                id: req.user.id
+            }
+        });
+        user.language = req.body.language;
+        user.save();
+        res.send(user);
     });
 
 }

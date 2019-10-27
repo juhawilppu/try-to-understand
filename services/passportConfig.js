@@ -26,6 +26,10 @@ module.exports = (app, sequelize) => {
                 proxy: true
             },
             async (accessToken, refreshToken, profile, done) => {
+
+                console.log('profile');
+                console.log(profile);
+
                 const existingUser = await sequelize.models.User.findOne({
                     where: {
                         google_id: profile.id

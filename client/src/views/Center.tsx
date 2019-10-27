@@ -47,16 +47,21 @@ class Dashboard extends React.Component<Props, State> {
         const content = this.state.loaded ? (
             <div className="list">
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/explain`)}>
-                    <PlusIcon style={styles.leftIcon} /> Explain
+                    Explain
                 </Button>
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/understand`)}>
-                    <PlusIcon style={styles.leftIcon} /> Understand
+                    Guess
                 </Button>
+                <br />
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/explanations`)}>
-                    <PlusIcon style={styles.leftIcon} /> My previous explanations
+                    My previous explanations
                 </Button>
+                <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/user-profile`)}>
+                    User profile
+                </Button>
+                <br /><br />
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/admin`)}>
-                    <PlusIcon style={styles.leftIcon} /> Admin
+                    Admin
                 </Button>
             </div>
         ) : (

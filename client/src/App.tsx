@@ -14,6 +14,7 @@ import Explanations from './views/Explanations';
 import Admin from './views/Admin';
 import AdminAddWord from './views/AdminAddWord';
 import Understand from './views/Understand';
+import UserProfile from './views/UserProfile';
 
 const theme = createMuiTheme({
   palette: {
@@ -64,6 +65,7 @@ class App extends Component<Props> {
               <Route path="/explanations" exact component={Explanations} />
               <Route path="/admin" exact component={Admin} />
               <Route path="/admin/add-word" exact component={AdminAddWord} />
+              <Route path="/user-profile" exact component={UserProfile} />
             </React.Fragment>
           )
     }

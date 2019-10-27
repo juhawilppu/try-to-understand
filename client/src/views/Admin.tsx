@@ -51,7 +51,7 @@ class NewMessage extends React.Component<Props, State> {
                     </thead>
                     <tbody>
                         {this.state.loaded && this.state.words.map((exp : any) => 
-                            <tr key={exp._id}>
+                            <tr key={exp.id}>
                                 <td>{exp.english}</td>
                                 <td>{exp.french}</td>
                                 <td>{exp.finnish}</td>
