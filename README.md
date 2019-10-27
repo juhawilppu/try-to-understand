@@ -53,17 +53,13 @@ Heroku is now configured.
 
 ## Running locally
 
-You need to install Docker first
-
 Start local PostgreSQL
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 Start development
 ```
-git clone git@github.com:juhawilppu/node-google-oauth.git
-cd node-google-oauth
 npm install
 cd client
 npm install

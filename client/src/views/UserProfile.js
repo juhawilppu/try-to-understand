@@ -28,8 +28,6 @@ class UserProfile extends React.Component {
 
         const options = [
             { value: 'english', label: 'English' },
-            { value: 'swedish', label: 'Swedish' },
-            { value: 'french', label: 'French' },
             { value: 'finnish', label: 'Finnish' }
         ]
 
