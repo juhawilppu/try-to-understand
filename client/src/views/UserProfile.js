@@ -1,18 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import { Button } from '@material-ui/core';
 
-interface Props extends RouteComponentProps {
-    auth: any;
-    saveUser: any;
-}
-interface State {
-
-}
-class UserProfile extends React.Component<Props, State> {
+class UserProfile extends React.Component {
     state = {
         learning: null
     }
@@ -58,8 +51,8 @@ class UserProfile extends React.Component<Props, State> {
     }
 }
 
-const mapStateToProps = (val : any) => {
+const mapStateToProps = (val) => {
     return { auth: val.auth };
-  }
+}
 
 export default withRouter(connect(mapStateToProps, actions)(UserProfile));

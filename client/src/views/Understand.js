@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
@@ -12,19 +12,7 @@ const styles = {
     }
 }
 
-interface Props extends RouteComponentProps {
-
-}
-interface State {
-    loaded: boolean;
-    content: string;
-    understand: any;
-    answered: boolean;
-    correct: boolean;
-    correctAnswer: string;
-    error: any;
-}
-class NewMessage extends React.Component<Props, State> {
+class Guess extends React.Component {
     state = {
         loaded: false,
         understand: null,
@@ -44,7 +32,7 @@ class NewMessage extends React.Component<Props, State> {
             assignmentId: this.state.understand._id,
             guess: this.state.content
         }
-        const response = await axios.post('/api/guess', dto) as any;
+        const response = await axios.post('/api/guess', dto);
 
         this.setState({ answered: true, correct: response.data.correct, correctAnswer: response.data.correctAnswer });
     }
@@ -142,4 +130,4 @@ class NewMessage extends React.Component<Props, State> {
     }
 }
 
-export default withRouter(NewMessage);
+export default withRouter(Guess);

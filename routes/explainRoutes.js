@@ -3,7 +3,7 @@ const requireLogin = require('../middlewares/requireLogin');
 module.exports = (app, sequelize) => {
 
     app.get(
-        '/api/assignment',
+        '/api/assignment/:language',
         requireLogin,
         async (req, res) => {
             const words = await sequelize.models.Word.findAll();
@@ -18,8 +18,7 @@ module.exports = (app, sequelize) => {
 
             const assignment = {
                 word,
-                language: 'french',
-                languageUi: 'French'
+                language: req.params.language
             }
 
             res.send(assignment);

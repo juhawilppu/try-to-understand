@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Logo from '../common/Logo';
@@ -20,10 +20,7 @@ const theme = createMuiTheme({
     }
 });
 
-interface Props extends RouteComponentProps {
-    auth: any;
-}
-class Header extends React.Component<Props> {
+class Header extends React.Component {
 
     renderContent() {
         switch(this.props.auth) {
@@ -70,7 +67,7 @@ class Header extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (val : any) => {
+const mapStateToProps = (val) => {
     return { auth: val.auth };
 }
 

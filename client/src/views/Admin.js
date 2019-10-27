@@ -1,18 +1,11 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
-interface Props extends RouteComponentProps {
-
-}
-interface State {
-    loaded: boolean;
-    words: any;
-}
-class NewMessage extends React.Component<Props, State> {
+class NewMessage extends React.Component {
     state = {
         loaded: false,
-        words: [] as any
+        words: []
     }
 
     componentDidMount() {
@@ -45,17 +38,15 @@ class NewMessage extends React.Component<Props, State> {
                             <th>English</th>
                             <th>French</th>
                             <th>Finnish</th>
-                            <th>Swedish</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.loaded && this.state.words.map((exp : any) => 
+                        {this.state.loaded && this.state.words.map(exp => 
                             <tr key={exp.id}>
                                 <td>{exp.english}</td>
                                 <td>{exp.french}</td>
                                 <td>{exp.finnish}</td>
-                                <td>{exp.swedish}</td>
                                 <td><button onClick={() => this.delete(exp._id)}>Delete</button></td>
                             </tr>
                         )}

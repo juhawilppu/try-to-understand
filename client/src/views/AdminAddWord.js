@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
@@ -12,26 +12,18 @@ const styles = {
     }
 }
 
-interface Props extends RouteComponentProps {
-
-}
-interface State {
-    english: string;
-    french: string;
-    finnish: string;
-    swedish: string;
-}
-class NewMessage extends React.Component<Props, State> {
+class AdminAddWord extends React.Component {
     state = {
         english: '',
         french: '',
-        finnish: '',
-        swedish: ''
+        finnish: ''
     }
 
     sendMessage = async () => {
-        const response = await axios.post('/api/words', this.state) as any;
-        this.props.history.push(`/admin`);
+        const response = await axios.post('/api/words', this.state);
+        if (response) {
+            this.props.history.push(`/admin`);
+        }
     }
 
     cancelMessage = () => {
@@ -50,7 +42,7 @@ class NewMessage extends React.Component<Props, State> {
                 <h2>Explain</h2>
                 <div style={{marginTop: '50px'}}>
                     <form noValidate autoComplete="off">
-                        {['english', 'french', 'finnish', 'swedish'].map((lang: any) => (
+                        {['english', 'french', 'finnish'].map(lang => (
                             <TextField
                                 id="standard-title"
                                 label={lang}
@@ -80,4 +72,4 @@ class NewMessage extends React.Component<Props, State> {
     }
 }
 
-export default withRouter(NewMessage);
+export default withRouter(AdminAddWord);

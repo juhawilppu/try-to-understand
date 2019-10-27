@@ -26,10 +26,6 @@ module.exports = (app, sequelize) => {
                 proxy: true
             },
             async (accessToken, refreshToken, profile, done) => {
-
-                console.log('profile');
-                console.log(profile);
-
                 const existingUser = await sequelize.models.User.findOne({
                     where: {
                         google_id: profile.id
@@ -42,9 +38,10 @@ module.exports = (app, sequelize) => {
                 } else {
                     // New user. Save it to db.
                     const user = await sequelize.models.User.build({
-                        googleId: profile.id,
+                        googleId: profile._json.sub,
                         email: profile._json.email,
-                        name: profile._json.name
+                        name: profile._json.name,
+                        language: 'english'
                     }).save();
                     done(null, user);
                 }

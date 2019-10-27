@@ -27,11 +27,13 @@ const theme = createMuiTheme({
   }
 });
 
-interface Props {
-  fetchUser : any;
-  auth: any;
+// disable no-extend-native
+String.prototype.replaceAll = function(search, replacement) {
+  var target = this;
+  return target.replace(new RegExp(search, 'g'), replacement);
 }
-class App extends Component<Props> {
+
+class App extends Component {
 
   componentDidMount = async () => {
     this.props.fetchUser();
