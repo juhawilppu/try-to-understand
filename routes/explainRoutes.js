@@ -32,7 +32,8 @@ module.exports = (app, sequelize) => {
             const messages = await sequelize.models.Explanation.findAll({
                 where: {
                     user_id: req.user.id
-                }
+                },
+                include: [sequelize.models.Word]
             })
 
             res.send(messages);

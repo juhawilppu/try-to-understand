@@ -23,4 +23,8 @@ module.exports = (sequelize) => {
     }, {
         sequelize
     });
+
+    // The naming is totally the opposite than what is actually happening
+    Explanation.belongsTo(sequelize.models.Word, {foreignKey: 'word_id'})
+
 }

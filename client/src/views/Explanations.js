@@ -19,7 +19,9 @@ class NewMessage extends React.Component {
             <div style={{width: '500px'}} className="explain-view">
                 <h2>Previous explanations</h2>
                 {this.state.loaded && this.state.explanations.length === 0 && <div>No explanations. Call to action!</div>}
-                {this.state.loaded && this.state.explanations.map((exp) => <div>{exp.word}</div>)}
+                {this.state.loaded && this.state.explanations.map((exp) =>
+                    <div>{exp.Word[exp.language]}</div>
+                )}
                 {!this.state.loaded && <div>Loading</div>}
             </div>
         )
