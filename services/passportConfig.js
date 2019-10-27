@@ -28,9 +28,11 @@ module.exports = (app, sequelize) => {
             async (accessToken, refreshToken, profile, done) => {
                 const existingUser = await sequelize.models.User.findOne({
                     where: {
-                        google_id: profile.id
+                        google_id: profile._json.sub
                     }
                 })
+
+                console.log('finding existin for ' + profile._json.sub)
 
                 if (existingUser) {
                     // We already have saved this customer to db
@@ -43,6 +45,8 @@ module.exports = (app, sequelize) => {
                         name: profile._json.name,
                         language: 'english'
                     }).save();
+
+                    console.log('saved user with ' + profile._json.sub);
                     done(null, user);
                 }
             }

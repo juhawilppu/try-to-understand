@@ -33,7 +33,7 @@ module.exports = (app, sequelize) => {
                 where: {
                     user_id: req.user.id
                 },
-                include: [sequelize.models.Word]
+                include: [sequelize.models.Word, sequelize.models.Guess]
             })
 
             res.send(messages);

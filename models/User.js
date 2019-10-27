@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        google_id: {
+        googleId: {
             type: Sequelize.STRING(50)
         },
         email: {

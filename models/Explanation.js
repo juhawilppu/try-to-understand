@@ -26,5 +26,5 @@ module.exports = (sequelize) => {
 
     // The naming is totally the opposite than what is actually happening
     Explanation.belongsTo(sequelize.models.Word, {foreignKey: 'word_id'})
-
+    Explanation.hasMany(sequelize.models.Guess, {foreignKey: 'explanation_id'})
 }
