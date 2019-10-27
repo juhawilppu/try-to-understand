@@ -6,11 +6,7 @@ module.exports = (app, sequelize) => {
         '/api/guess',
         requireLogin,
         async (req, res) => {
-            const explanations = await sequelize.models.Explanation.findAll({
-                where: {
-                    downvotes: 0
-                }
-            })
+            const explanations = await sequelize.models.Explanation.findAll();
 
             if (explanations.length === 0) {
                 res.send({ message: 'No explanations on server'}, 404);
@@ -30,32 +26,21 @@ module.exports = (app, sequelize) => {
         async (req, res) => {
 
             const explanation = await sequelize.models.Explanation.findByPk(req.body.assignmentId);
+            const word = await sequelize.models.Word.findByPk(explanation.word_id);
+
+            console.log('received guess ' + req.body.guess);
+            console.log('word in english' + word.english);
+            console.log('guess language' + explanation.language);
 
             const message = await sequelize.models.Guess.build({
                 assignmentId: explanation.id,
                 guess: req.body.guess,
-                correct: explanation.word === req.body.guess,
+                correct: word[explanation.language] === req.body.guess,
                 userId: req.user.id
             }).save();
             res.send({
                 correct: message.correct,
-                correctAnswer: explanation.word
-            });
-        }
-    );
-
-    app.post(
-        '/api/guess/report/:id',
-        requireLogin,
-        async (req, res) => {
-
-            console.log('downvoting ' + req.params.id)
-            const explanation = await sequelize.models.Explanation.findByPk(req.params.id);
-            explanation.downvotes = 1;
-            explanation.save();
-
-            res.send({
-                message: 'reported'
+                correctAnswer: word[explanation.language]
             });
         }
     );

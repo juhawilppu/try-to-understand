@@ -9,19 +9,13 @@ module.exports = (sequelize) => {
             autoIncrement: true
         },
         explanation: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.STRING(400)
         },
         word_id: {
             type: Sequelize.INTEGER
         },
         language: {
             type: Sequelize.STRING(50)
-        },
-        downvotes: {
-            type: Sequelize.INTEGER
-        },
-        sent: {
-            type: Sequelize.DATE
         },
         user_id: {
             type: Sequelize.INTEGER

@@ -29,7 +29,7 @@ class Guess extends React.Component {
 
     sendMessage = async () => {
         const dto = {
-            assignmentId: this.state.understand._id,
+            assignmentId: this.state.understand.id,
             guess: this.state.content
         }
         const response = await axios.post('/api/guess', dto);
@@ -44,7 +44,9 @@ class Guess extends React.Component {
     renderResult = () => (
         <div>
             Your answer is {this.state.correct ? 'Correct' : 'Wrong. It tried to describe a ' + this.state.correctAnswer + '.' }
-            <Button onClick={this.next}>Next</Button>
+            <div>
+                <Button variant="contained" color="primary" onClick={this.next}>Next</Button>
+            </div>
         </div>
     )
 
@@ -80,14 +82,14 @@ class Guess extends React.Component {
                     fullWidth
                 />
                 <div style={{marginTop: '20px', display: 'flex', justifyContent: 'flex-end'}}>
-                <Button variant="flat" color="primary" style={styles.leftIcon} onClick={this.report}>
+                <Button variant="flat" color="primary" style={styles.leftIcon} onClick={() => alert('not implemented')}>
                         Report
                     </Button>
                     <Button variant="contained" color="primary" style={styles.leftIcon} onClick={this.sendMessage}>
-                        <SendIcon style={styles.leftIcon} /> Send
+                        Send
                     </Button>
                     <Button variant="contained" onClick={this.cancelMessage}>
-                        <CancelIcon style={styles.leftIcon} /> Skip
+                        Skip
                     </Button>
                 </div>
             </form>
@@ -99,8 +101,8 @@ class Guess extends React.Component {
         if (this.state.error) {
             return (
                 <div style={{width: '500px'}} className="explain-view">
-                    <h2>Understand</h2>
-                    <div>No assignments found. You need to wait a bit.</div>
+                    <h2>Guess</h2>
+                    <div>No explanations found. You need to wait a bit for other users to write them.</div>
                 </div>
             )
         }
@@ -108,14 +110,14 @@ class Guess extends React.Component {
         if (!this.state.loaded) {
             return (
                 <div style={{width: '500px'}} className="explain-view">
-                    <h2>Understand</h2>
+                    <h2>Guess</h2>
                 </div>
             )
         }
 
         return (
             <div style={{width: '500px'}} className="explain-view">
-                <h2>Understand</h2>
+                <h2>Guess</h2>
                 <div>
                     <div className="header-for-word">
                         Guess what this is explaining

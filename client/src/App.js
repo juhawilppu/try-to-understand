@@ -13,7 +13,7 @@ import Center from './views/Center';
 import Explanations from './views/Explanations';
 import Admin from './views/Admin';
 import AdminAddWord from './views/AdminAddWord';
-import Understand from './views/Understand';
+import Guess from './views/Guess';
 import UserProfile from './views/UserProfile';
 
 const theme = createMuiTheme({
@@ -68,7 +68,7 @@ class App extends Component {
               <Route path="/" exact component={Center} />
               <Route path="/center" exact component={Center} />
               <Route path="/explain" exact component={Explain} />
-              <Route path="/understand" exact component={Understand} />
+              <Route path="/guess" exact component={Guess} />
               <Route path="/explanations" exact component={Explanations} />
               <Route path="/admin" exact component={Admin} />
               <Route path="/admin/add-word" exact component={AdminAddWord} />

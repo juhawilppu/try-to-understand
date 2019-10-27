@@ -45,7 +45,7 @@ module.exports = (app, sequelize) => {
         async (req, res) => {
             const message = await sequelize.models.Explanation.build({
                 explanation: req.body.explanation,
-                word: req.body.word,
+                word_id: req.body.word_id,
                 language: req.body.language,
                 user_id: req.user.id
             }).save();

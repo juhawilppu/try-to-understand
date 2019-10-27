@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/explain`)}>
                     Explain
                 </Button>
-                <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/understand`)}>
+                <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/guess`)}>
                     Guess
                 </Button>
                 <br />

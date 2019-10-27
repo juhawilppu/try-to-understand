@@ -41,7 +41,7 @@ class Explain extends React.Component {
     sendMessage = async () => {
         const dto = {
             explanation: this.state.content,
-            word: this.state.assignment.word.id,
+            word_id: this.state.assignment.word.id,
             language: this.state.assignment.language
         }
         const response = await axios.post('/api/explanations', dto);
@@ -111,7 +111,7 @@ class Explain extends React.Component {
                     <form noValidate autoComplete="off">
                         <TextField
                             id="standard-title"
-                            label={`Explain`}
+                            label={`Explain (${this.state.content.length}/400)`}
                             variant="outlined"
                             multiline
                             rows="6"
