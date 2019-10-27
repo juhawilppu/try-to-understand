@@ -54,14 +54,14 @@ class Explain extends React.Component {
 
     change = (word) => {
         const wantedWord = this.state.assignment.word[this.state.assignment.language];
-        const cheat1 = word.split(' ').includes(wantedWord);
-        const cheat2 = word.includes(wantedWord);
-        const cheat3 = word
-            .replaceAll(' ', '')
-            .replaceAll('_', '')
-            .replaceAll('\.', '')
+
+        const cheat = word
+            .trim(' ')
+            .trim('.')
+            .trim('-')
+            .trim('_')
             .includes(wantedWord);
-        const allowed = !cheat1 && !cheat2 && !cheat3;
+        const allowed = !cheat;
 
         this.setState({ content: word, allowed })
     }
