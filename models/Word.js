@@ -11,9 +11,6 @@ module.exports = (sequelize) => {
         english: {
             type: Sequelize.STRING(256)
         },
-        french: {
-            type: Sequelize.STRING(256)
-        },
         finnish: {
             type: Sequelize.STRING(256)
         },

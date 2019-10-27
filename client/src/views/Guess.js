@@ -3,8 +3,6 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import SendIcon from '@material-ui/icons/Send';
-import CancelIcon from '@material-ui/icons/Cancel';
 
 const styles = {
     leftIcon: {
@@ -43,10 +41,10 @@ class Guess extends React.Component {
 
     renderResult = () => (
         <div>
-            Your answer is {this.state.correct ? 'Correct' : 'Wrong. It tried to describe a ' + this.state.correctAnswer + '.' }
-            <div>
-                <Button variant="contained" color="primary" onClick={this.next}>Next</Button>
+            <div className="common-info-box">
+                Your answer is {this.state.correct ? <span className="common-correct">Correct</span> : 'Wrong. It tried to describe a ' + this.state.correctAnswer + '.' }
             </div>
+            <Button variant="contained" color="primary" onClick={this.next}>Next</Button>
         </div>
     )
 
@@ -102,7 +100,7 @@ class Guess extends React.Component {
             return (
                 <div style={{width: '500px'}} className="explain-view">
                     <h2>Guess</h2>
-                    <div>No explanations found. You need to wait a bit for other users to write them.</div>
+                    <div className="common-info-box">No explanations found. You need to wait a bit for other users to write them.</div>
                 </div>
             )
         }
@@ -129,7 +127,7 @@ class Guess extends React.Component {
                         as explained by user-{this.state.understand.user_id}
                     </div>
                 </div>
-                {this.state.answered ? <this.renderResult /> : <this.renderGuess />}
+                {this.state.answered ? this.renderResult() : this.renderGuess() }
             </div>
         )
     }

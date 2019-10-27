@@ -17,9 +17,6 @@ module.exports = (sequelize) => {
         correct: {
             type: Sequelize.BOOLEAN
         },
-        sent: {
-            type: Sequelize.DATE
-        },
         user_id: {
             type: Sequelize.INTEGER
         }

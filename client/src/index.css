@@ -73,3 +73,15 @@ code {
 table th {
   text-align: left;
 }
+
+
+.common-info-box {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.common-correct {
+  color: green;
+  font-weight: bold;
+}

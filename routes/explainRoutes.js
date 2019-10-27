@@ -35,7 +35,6 @@ module.exports = (app, sequelize) => {
                 },
                 include: [sequelize.models.Word, sequelize.models.Guess]
             })
-
             res.send(messages);
         }
     );

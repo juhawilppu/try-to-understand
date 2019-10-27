@@ -19,37 +19,55 @@ class NewMessage extends React.Component {
         this.props.history.push('/explain');
     }
 
+    renderCallToAction = () => (
+        <div>
+            <div className="common-info-box">You have no explanations.</div>
+            <Button variant="contained" color="primary" onClick={this.gotoExplain}>Go explain things!</Button>
+        </div>
+    )
+
+    renderTable = () => (
+        <table>
+            <thead>
+                <tr>
+                    <th>Language</th>
+                    <th>Word</th>
+                    <th>Correctness</th>
+                    <th>Guesses</th>
+                </tr>
+            </thead>
+            <tbody>
+                {this.state.explanations.map((exp) => {
+                    const guesses = exp.Guesses.length;
+                    const correct = exp.Guesses.filter(g => g.correct).length;
+                    return (
+                        <tr>
+                            <td>{exp.language}</td>
+                            <td>{exp.Word[exp.language]}</td>
+                            <td>
+                                {guesses === 0 ? <span>-</span> : <span>{(correct*100/guesses).toFixed(2)} %</span>}
+                            </td>
+                            <td>{exp.Guesses.length}</td>
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </table>
+    )
+
     render() {
+        if (!this.state.loaded) {
+            return <span>...</span>
+        }
+
         return (
             <div style={{width: '500px'}} className="explain-view">
                 <h2>Previous explanations</h2>
 
-                {this.state.loaded && this.state.explanations.length === 0 &&
-                    <div>
-                        <div>No explanations.</div>
-                        <Button variant="contained" color="primary" onClick={this.gotoExplain}>Go explain things</Button>
-                    </div>
-                }
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Language</th>
-                            <th>Word</th>
-                            <th>Correctness</th>
-                            <th>Guesses</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.explanations.map((exp) =>
-                            <tr>
-                                <td>{exp.language}</td>
-                                <td>{exp.Word[exp.language]}</td>
-                                <td>{exp.Guesses.filter(g => g.correct).length}</td>
-                                <td>{exp.Guesses.length}</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+                {this.state.explanations.length === 0 ?
+                    this.renderCallToAction() :
+                    this.renderTable()}
+
             </div>
         )
     }

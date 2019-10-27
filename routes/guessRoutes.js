@@ -44,7 +44,7 @@ module.exports = (app, sequelize) => {
             console.log('guess language' + explanation.language);
 
             const message = await sequelize.models.Guess.build({
-                assignmentId: explanation.id,
+                explanationId: explanation.id,
                 guess: req.body.guess,
                 correct: word[explanation.language] === req.body.guess,
                 userId: req.user.id

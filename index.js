@@ -55,16 +55,15 @@ const PORT = process.env.PORT || 5000;
 
 const saveBasicWords = () => {
     const basicWords = [
-       ['dog', 'chien', 'koira'],
-       ['cat', 'chat', 'kissa'],
-       ['year', 'année', 'vuosi'],
-       ['country', 'pays', 'maa']
+       ['dog', 'koira'],
+       ['cat', 'kissa'],
+       ['year', 'vuosi'],
+       ['country', 'maa']
     ]
     basicWords.map(b => {
         sequelize.models.Word.build({
             english: b[0],
-            french: b[1],
-            finnish: b[2],
+            finnish: b[1],
             userId: -1
         }).save();
     })

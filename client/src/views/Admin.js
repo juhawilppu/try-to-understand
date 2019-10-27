@@ -36,7 +36,6 @@ class NewMessage extends React.Component {
                     <thead>
                         <tr>
                             <th>English</th>
-                            <th>French</th>
                             <th>Finnish</th>
                             <th></th>
                         </tr>
@@ -45,7 +44,6 @@ class NewMessage extends React.Component {
                         {this.state.loaded && this.state.words.map(exp => 
                             <tr key={exp.id}>
                                 <td>{exp.english}</td>
-                                <td>{exp.french}</td>
                                 <td>{exp.finnish}</td>
                                 <td><button onClick={() => this.delete(exp._id)}>Delete</button></td>
                             </tr>
