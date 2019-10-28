@@ -27,12 +27,12 @@ const theme = createMuiTheme({
   }
 });
 
-// disable no-extend-native
+// eslint-disable-next-line
 String.prototype.replaceAll = function(search, replacement) {
   var target = this;
   return target.split(search).join(replacement);
 };
-// disable no-extend-native
+// eslint-disable-next-line
 String.prototype.trim = function(character) {
   var target = this;
   return target.replaceAll(character, '')

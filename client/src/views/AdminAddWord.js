@@ -3,9 +3,6 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import TButton from 'components/TButton';
 import TextField from '@material-ui/core/TextField';
-import SendIcon from '@material-ui/icons/Send';
-import CancelIcon from '@material-ui/icons/Cancel';
-
 
 class AdminAddWord extends React.Component {
     state = {

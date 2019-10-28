@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Button } from '@material-ui/core'
 import axios from 'axios';
 
-class NewMessage extends React.Component {
+class Explanations extends React.Component {
     state = {
         loaded: false,
         explanations: []
@@ -41,7 +41,7 @@ class NewMessage extends React.Component {
                     const guesses = exp.Guesses.length;
                     const correct = exp.Guesses.filter(g => g.correct).length;
                     return (
-                        <tr>
+                        <tr key={exp.id}>
                             <td>{exp.language}</td>
                             <td>{exp.Word[exp.language]}</td>
                             <td>
@@ -67,10 +67,9 @@ class NewMessage extends React.Component {
                 {this.state.explanations.length === 0 ?
                     this.renderCallToAction() :
                     this.renderTable()}
-
             </div>
         )
     }
 }
 
-export default withRouter(NewMessage);
+export default withRouter(Explanations);

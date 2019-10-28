@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { Button } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -29,7 +27,7 @@ class Dashboard extends React.Component {
             <React.Fragment>
                 <div className="block-list">
                     {options.filter((k,i) => i < 3).map(option => (
-                        <div className="t-block" onClick={() => this.props.history.push(option.link)}>
+                        <div key={option.header} className="t-block" onClick={() => this.props.history.push(option.link)}>
                             <div className="block-header">{option.header}</div>
                             <div className="block-description">{option.description}</div>
                         </div>
@@ -37,7 +35,7 @@ class Dashboard extends React.Component {
                 </div>
                 <div className="block-list">
                     {options.filter((k,i) => i >= 3).map(option => (
-                        <div className="t-block" onClick={() => this.props.history.push(option.link)}>
+                        <div key={option.header} className="t-block" onClick={() => this.props.history.push(option.link)}>
                             <div className="block-header">{option.header}</div>
                             <div className="block-description">{option.description}</div>
                         </div>

@@ -102,19 +102,19 @@ class Guess extends React.Component {
 
     getOptions = firstHalf => {
         const splitted = this.state.assignment.options.split(',');
-        return splitted.filter((o, index) => index < splitted.length/2 === firstHalf);
+        return splitted.filter((o, index) => (index < splitted.length/2) === firstHalf);
     }
 
     renderOptionsInput = () => (
         <React.Fragment>
             <div className="options-list">
                 {this.getOptions(true).map(option => (
-                    <TButton onClick={() => this.sendGuess(option)}>{option}</TButton>
+                    <TButton key={option} onClick={() => this.sendGuess(option)}>{option}</TButton>
                 ))}
             </div>
             <div className="options-list">
                 {this.getOptions(false).map(option => (
-                    <TButton onClick={() => this.sendGuess(option)}>{option}</TButton>
+                    <TButton key={option} onClick={() => this.sendGuess(option)}>{option}</TButton>
                 ))}
             </div>
             <div style={{marginTop: '20px', display: 'flex', justifyguess: 'flex-end'}}>

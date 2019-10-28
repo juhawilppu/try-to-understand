@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { withRouter } from 'react-router-dom';
 import Select from 'react-select';
-import { Button } from '@material-ui/core';
+import TButton from 'components/TButton';
 
 class UserProfile extends React.Component {
     state = {
@@ -42,7 +42,7 @@ class UserProfile extends React.Component {
                         onChange={this.handleChange}
                         options={options}
                     /> <br />
-                    <Button variant="contained" onClick={this.save}>Save</Button>
+                    <TButton onClick={this.save}>Save</TButton>
                 </div>
             </div>
         )

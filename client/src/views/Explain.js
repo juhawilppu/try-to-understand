@@ -131,7 +131,6 @@ class Explain extends React.Component {
                             onKeyDown={this.onKeyDown}
                             placeholder="Explain the given word so that another person can guess the word. It's not allowed to mention the given word."
                             autoFocus
-                            fullWidth
                         />
                         {!this.state.allowed && <div style={{ color: 'red' }}>You are trying to cheat. Please stop.</div>}
                         <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
