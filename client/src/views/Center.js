@@ -20,19 +20,30 @@ class Dashboard extends React.Component {
             option('Explain', 'Try to explain words', '/explain/TEXT_OPTIONS'),
             option('Guess', 'Guess what others tried to explain', '/guess'),
             option('Results', 'See results for your explanations', '/explanations'),
+            option('Profile', 'See your profile', '/user-profile'),
             option('Leaderboard', 'See the champions', '/leaderboards'),
             option('Admin', 'Modify words', '/admin')
         ]
 
         return (
-            <div className="block-list">
-                {options.map(option => (
-                    <div className="t-block" onClick={() => this.props.history.push(option.link)}>
-                        <div className="block-header">{option.header}</div>
-                        <div className="block-description">{option.description}</div>
-                    </div>
-                ))}
-            </div>
+            <React.Fragment>
+                <div className="block-list">
+                    {options.filter((k,i) => i < 3).map(option => (
+                        <div className="t-block" onClick={() => this.props.history.push(option.link)}>
+                            <div className="block-header">{option.header}</div>
+                            <div className="block-description">{option.description}</div>
+                        </div>
+                    ))}
+                </div>
+                <div className="block-list">
+                    {options.filter((k,i) => i >= 3).map(option => (
+                        <div className="t-block" onClick={() => this.props.history.push(option.link)}>
+                            <div className="block-header">{option.header}</div>
+                            <div className="block-description">{option.description}</div>
+                        </div>
+                    ))}
+                </div>
+            </React.Fragment>
         )
     }
 
@@ -46,7 +57,7 @@ class Dashboard extends React.Component {
         )
 
         return (
-            <div className="page center-page">
+            <div className="page center-page page">
                 <h2>Explain Center</h2>
                 {content}
             </div>

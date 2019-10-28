@@ -1,16 +1,11 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import { Button } from '@material-ui/core';
+import TButton from 'components/TButton';
 import TextField from '@material-ui/core/TextField';
 import SendIcon from '@material-ui/icons/Send';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-const styles = {
-    leftIcon: {
-        marginRight: '10px'
-    }
-}
 
 class AdminAddWord extends React.Component {
     state = {
@@ -56,12 +51,12 @@ class AdminAddWord extends React.Component {
                             />
                         ))}
                         <div style={{marginTop: '20px', display: 'flex', justifyContent: 'flex-end'}}>
-                            <Button variant="contained" color="primary" style={styles.leftIcon} onClick={this.sendMessage}>
-                                <SendIcon style={styles.leftIcon} /> Save
-                            </Button>
-                            <Button variant="contained" onClick={this.cancelMessage}>
-                                <CancelIcon style={styles.leftIcon} /> Cancel
-                            </Button>
+                            <TButton onClick={this.sendMessage}>
+                                Save
+                            </TButton>
+                            <TButton onClick={this.cancelMessage}>
+                                Cancel
+                            </TButton>
                         </div>
                     </form>
                 </div>

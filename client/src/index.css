@@ -4,11 +4,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Open Sans', sans-serif;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-size: 17px;
 }
 
 .header {
@@ -124,6 +120,7 @@ button.flat {
   border: 0;
   font-size: 17px;
   outline: none;
+  background: transparent;
   cursor: pointer;
 }
 
@@ -137,9 +134,21 @@ button.flat:active {
   color: white;
 }
 
+textarea.text {
+  width: 100%;
+  outline: none;
+  border: 1px solid black;
+  font-size: 17px;
+  padding: 5px;
+}
+
 .block-list {
   display: flex;
   justify-content: space-between;
+}
+
+.block-list + .block-list {
+  margin-top: 10px;
 }
 
 .t-block {
@@ -172,4 +181,22 @@ button.flat:active {
 
 h2 {
   text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table thead {
+  background: #2196F3;
+  color: white;
+}
+
+table tbody tr:nth-child(even) {
+  background: #B3E5FC;
+}
+
+table th, table td {
+  padding: 5px;
 }

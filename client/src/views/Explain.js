@@ -3,14 +3,8 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { Button } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-
-const styles = {
-    leftIcon: {
-        marginRight: '10px'
-    }
-}
+import TButton from 'components/TButton';
+import TTextfield from 'components/TTextfield';
 
 class Explain extends React.Component {
     state = {
@@ -129,28 +123,24 @@ class Explain extends React.Component {
                 }
                 <div style={{ marginTop: '50px' }}>
                     <form noValidate autoComplete="off">
-                        <TextField
-                            id="standard-title"
+                        <TTextfield
                             label={`Explain (${this.state.content.length}/400)`}
-                            variant="outlined"
-                            multiline
-                            rows="6"
+                            rows={6}
                             value={this.state.content}
                             onChange={event => this.change(event.target.value)}
                             onKeyDown={this.onKeyDown}
-                            margin="normal"
                             placeholder="Explain the given word so that another person can guess the word. It's not allowed to mention the given word."
                             autoFocus
                             fullWidth
                         />
                         {!this.state.allowed && <div style={{ color: 'red' }}>You are trying to cheat. Please stop.</div>}
                         <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-                            <Button variant="contained" color="primary" style={styles.leftIcon} onClick={this.sendAnswer}>
+                            <TButton onClick={this.sendAnswer}>
                                 Send
-                            </Button>
-                            <Button variant="contained" onClick={this.cancelMessage}>
+                            </TButton>
+                            <TButton flat onClick={this.cancelMessage}>
                                 Quit
-                            </Button>
+                            </TButton>
                         </div>
                     </form>
                 </div>

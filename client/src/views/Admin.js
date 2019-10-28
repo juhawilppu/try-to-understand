@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import TButton from 'components/TButton';
 
 class NewMessage extends React.Component {
     state = {
@@ -43,12 +44,12 @@ class NewMessage extends React.Component {
                         {this.state.loaded && this.state.words.map(exp => 
                             <tr key={exp.id}>
                                 <td>{exp.english}</td>
-                                <td><button onClick={() => this.delete(exp._id)}>Delete</button></td>
+                                <td><TButton flat onClick={() => this.delete(exp._id)}>Delete</TButton></td>
                             </tr>
                         )}
                     </tbody>
                 </table>
-                <button onClick={this.gotoAddWord}>Add word</button>
+                <TButton onClick={this.gotoAddWord}>Add word</TButton>
                 {this.state.loaded && this.state.words.length === 0 && <div>No words.</div>}
                 {!this.state.loaded && <div>Loading</div>}
             </div>
