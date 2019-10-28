@@ -136,3 +136,40 @@ button.flat:active {
   background: #81C784;
   color: white;
 }
+
+.block-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.t-block {
+  background: #E0E0E0;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.t-block:hover {
+  background: #BDBDBD;
+}
+
+.t-block + .t-block {
+  margin-left: 10px;
+}
+
+.t-block .block-header {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.t-block .block-description {
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+}
