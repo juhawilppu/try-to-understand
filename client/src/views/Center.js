@@ -14,11 +14,8 @@ class Dashboard extends React.Component {
 
         const content = this.state.loaded ? (
             <div className="list">
-                <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/explain/TEXT_FREETEXT`)}>
-                    Explain (freetext)
-                </Button>
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/explain/TEXT_OPTIONS`)}>
-                    Explain (options)
+                    Explain
                 </Button>
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/guess`)}>
                     Guess

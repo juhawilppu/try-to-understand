@@ -3,12 +3,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-
-const styles = {
-    leftIcon: {
-        marginRight: '10px'
-    }
-}
+import TButton from 'components/TButton';
 
 class Guess extends React.Component {
     state = {
@@ -69,7 +64,6 @@ class Guess extends React.Component {
     }
 
     renderInputUi = () => {
-        console.log(this.state);
         if (this.state.assignment.options) {
             return this.renderOptionsInput();
         } else {
@@ -93,31 +87,33 @@ class Guess extends React.Component {
                 fullWidth
             />
             <div style={{marginTop: '20px', display: 'flex', justifyguess: 'flex-end'}}>
-                <Button onClick={() => alert('not implemented')}>
+                <TButton onClick={() => alert('not implemented')}>
                     Report
-                </Button>
-                <Button variant="contained" color="primary" onClick={this.sendMessage}>
+                </TButton>
+                <TButton onClick={this.sendMessage}>
                     Send
-                </Button>
-                <Button onClick={this.cancelMessage}>
+                </TButton>
+                <TButton onClick={this.cancelMessage}>
                     Skip
-                </Button>
+                </TButton>
             </div>
         </React.Fragment>
     )
 
     renderOptionsInput = () => (
         <React.Fragment>
-            {this.state.assignment.options.split(',').map(option => (
-                <Button variant="contained" color="primary" onClick={() => this.sendGuess(option)}>{option}</Button>
-            ))}
+            <div>
+                {this.state.assignment.options.split(',').map(option => (
+                    <TButton onClick={() => this.sendGuess(option)}>{option}</TButton>
+                ))}
+            </div>
             <div style={{marginTop: '20px', display: 'flex', justifyguess: 'flex-end'}}>
-            <Button variant="flat" onClick={() => alert('not implemented')}>
+            <TButton flat onClick={() => alert('not implemented')}>
                 Report
-            </Button>
-            <Button onClick={this.cancelMessage}>
+            </TButton>
+            <TButton flat onClick={this.cancelMessage}>
                 Skip
-            </Button>
+            </TButton>
         </div>
     </React.Fragment>
     )

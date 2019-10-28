@@ -83,3 +83,48 @@ table th {
   color: green;
   font-weight: bold;
 }
+
+
+
+/** Buttons **/
+
+button.primary {
+  padding: 5px 15px;
+  border-radius: 20px;
+  background: #4CAF50;
+  border: 0;
+  font-size: 17px;
+  outline: none;
+  cursor: pointer;
+}
+
+button.primary:hover {
+  background: #66BB6A;
+  color: white;
+}
+
+button.primary:active {
+  background: #81C784;
+  color: white;
+}
+
+/** Buttons **/
+
+button.flat {
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: 0;
+  font-size: 17px;
+  outline: none;
+  cursor: pointer;
+}
+
+button.flat:hover {
+  background: #66BB6A;
+  color: white;
+}
+
+button.flat:active {
+  background: #81C784;
+  color: white;
+}
