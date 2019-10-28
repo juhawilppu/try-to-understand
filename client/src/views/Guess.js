@@ -118,7 +118,7 @@ class Guess extends React.Component {
                 <h2>Guess</h2>
                 <div>
                     <div className="header-for-word">
-                        Guess what this is explaining
+                        Guess what this means:
                     </div>
                     <div className="word">
                         {this.state.understand.explanation}

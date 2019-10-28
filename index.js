@@ -14,7 +14,7 @@ const sequelize = new Sequelize(keys.postgres.database, keys.postgres.username, 
         underscored: true,
         paranoid: true
     },
-    //force: true // This will DROP tables and rebuild schema
+    force: true // This will DROP tables and rebuild schema
 });
 
 app.use(
@@ -53,25 +53,6 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
-const saveBasicWords = () => {
-    const basicWords = [
-       ['dog', 'koira'],
-       ['cat', 'kissa'],
-       ['year', 'vuosi'],
-       ['country', 'maa']
-    ]
-    basicWords.map(b => {
-        sequelize.models.Word.build({
-            english: b[0],
-            finnish: b[1],
-            userId: -1
-        }).save();
-    })
-}
-
 sequelize.sync().then(() => {
-
-    saveBasicWords();
-
     app.listen(PORT)
 });

@@ -14,8 +14,7 @@ const styles = {
 
 class AdminAddWord extends React.Component {
     state = {
-        english: '',
-        finnish: ''
+        english: ''
     }
 
     sendMessage = async () => {
@@ -41,7 +40,7 @@ class AdminAddWord extends React.Component {
                 <h2>Explain</h2>
                 <div style={{marginTop: '50px'}}>
                     <form noValidate autoComplete="off">
-                        {['english', 'finnish'].map(lang => (
+                        {['english'].map(lang => (
                             <TextField
                                 id="standard-title"
                                 label={lang}
