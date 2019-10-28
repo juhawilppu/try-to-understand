@@ -85,6 +85,15 @@ table th {
 }
 
 
+.options-list {
+  display: flex;
+}
+
+.options-list button {
+  width: 20%;
+  margin: 5px;
+}
+
 
 /** Buttons **/
 
@@ -92,6 +101,7 @@ button.primary {
   padding: 5px 15px;
   border-radius: 20px;
   background: #4CAF50;
+  color: white;
   border: 0;
   font-size: 17px;
   outline: none;
@@ -99,16 +109,14 @@ button.primary {
 }
 
 button.primary:hover {
-  background: #66BB6A;
-  color: white;
-}
-
-button.primary:active {
   background: #81C784;
   color: white;
 }
 
-/** Buttons **/
+button.primary:active {
+  background: #A5D6A7;
+  color: black;
+}
 
 button.flat {
   padding: 5px 15px;
