@@ -67,7 +67,7 @@ class App extends Component {
             <React.Fragment>
               <Route path="/" exact component={Center} />
               <Route path="/center" exact component={Center} />
-              <Route path="/explain" exact component={Explain} />
+              <Route path="/explain/:assignmentType" exact component={Explain} />
               <Route path="/guess" exact component={Guess} />
               <Route path="/explanations" exact component={Explanations} />
               <Route path="/admin" exact component={Admin} />

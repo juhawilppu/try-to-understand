@@ -22,10 +22,14 @@ class Explain extends React.Component {
         time: 60
     }
 
-    componentDidMount = async () => {
+    componentDidMount = () => {
+        this.next();
+    }
+
+    next = async () => {
         try {
-            const response = await axios.get(`/api/assignment/${this.props.auth.language}`);
-            this.setState({ loaded: true, assignment: response.data }, this.startTimer);
+            const response = await axios.get(`/api/assignments/${this.props.auth.language}`);
+            this.setState({ loaded: true, assignment: response.data, content: '', time: 60 }, this.startTimer);
         } catch (error) {
             this.setState({ error })
         }
@@ -36,16 +40,23 @@ class Explain extends React.Component {
             const time = this.state.time - 1;
             this.setState({ time });
         }, 1000);
+        this.setState({ timer });
     }
 
-    sendMessage = async () => {
+    sendAnswer = async () => {
+        clearInterval(this.state.timer);
         const dto = {
             explanation: this.state.content,
-            word_id: this.state.assignment.word.id,
+            wordId: this.state.assignment.wordId,
             language: this.state.assignment.language
         }
-        const response = await axios.post('/api/explanations', dto);
-        this.props.history.push(`/center`);
+        const response = await axios.post(`/api/assignments/${this.props.match.params.assignmentType}`, dto);
+        if (response) {
+            this.next();
+        } else {
+            alert('failed');
+        }
+
     }
 
     cancelMessage = () => {
@@ -66,11 +77,20 @@ class Explain extends React.Component {
         this.setState({ content: word, allowed })
     }
 
+    onKeyDown = (event) => {
+        // 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            event.stopPropagation();
+            this.sendAnswer();
+        }
+    }
+
     render() {
 
         if (this.state.error) {
             return (
-                <div style={{width: '500px'}} className="explain-view">
+                <div style={{ width: '500px' }} className="explain-view">
                     <h2>Explain</h2>
                     <div>Unexpected error. Possibly no words created?</div>
                 </div>
@@ -79,14 +99,14 @@ class Explain extends React.Component {
 
         if (!this.state.loaded) {
             return (
-                <div style={{width: '500px'}} className="explain-view">
+                <div style={{ width: '500px' }} className="explain-view">
                     <h2>Explain</h2>
                 </div>
             )
         }
 
         return (
-            <div style={{width: '500px'}} className="explain-view">
+            <div style={{ width: '500px' }} className="explain-view">
                 <h2>Explain</h2>
                 <div>
                     <div className="header-for-word">
@@ -102,12 +122,12 @@ class Explain extends React.Component {
                 <div className="time-remaining">
                     Time remaining: {this.state.time}
                 </div>
-                {this.state.time < 0 && 
-                    <div style={{color: 'red'}}>
+                {this.state.time < 0 &&
+                    <div style={{ color: 'red' }}>
                         Time is up!
                     </div>
                 }
-                <div style={{marginTop: '50px'}}>
+                <div style={{ marginTop: '50px' }}>
                     <form noValidate autoComplete="off">
                         <TextField
                             id="standard-title"
@@ -117,18 +137,19 @@ class Explain extends React.Component {
                             rows="6"
                             value={this.state.content}
                             onChange={event => this.change(event.target.value)}
+                            onKeyDown={this.onKeyDown}
                             margin="normal"
                             placeholder="Explain the given word so that another person can guess the word. It's not allowed to mention the given word."
                             autoFocus
                             fullWidth
                         />
-                        {!this.state.allowed && <div style={{color: 'red'}}>You are trying to cheat. Please stop.</div>}
-                        <div style={{marginTop: '20px', display: 'flex', justifyContent: 'flex-end'}}>
-                            <Button variant="contained" color="primary" style={styles.leftIcon} disabled={this.state.time < 0} onClick={this.sendMessage}>
+                        {!this.state.allowed && <div style={{ color: 'red' }}>You are trying to cheat. Please stop.</div>}
+                        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+                            <Button variant="contained" color="primary" style={styles.leftIcon} onClick={this.sendAnswer}>
                                 Send
                             </Button>
                             <Button variant="contained" onClick={this.cancelMessage}>
-                                Skip
+                                Quit
                             </Button>
                         </div>
                     </form>

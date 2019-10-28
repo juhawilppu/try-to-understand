@@ -8,25 +8,10 @@ module.exports = (app, sequelize) => {
         '/api/guess',
         requireLogin,
         async (req, res) => {
-
             // Get an explanation randomly from some user other than myself
-            const explanations = await sequelize.models.Explanation.findAll({
-                where: {
-                    user_id: {
-                        [Op.ne]: req.user.id
-                    }
-                }
-            });
-
-            if (explanations.length === 0) {
-                res.send({ message: 'No explanations on server' }, 404);
-            }
-
-            function random(mn, mx) {
-                return Math.random() * (mx - mn) + mn;
-            }
-
-            const explanation = explanations[Math.floor(random(0, explanations.length))];
+            const explanations = await sequelize.query(`SELECT * FROM Assignments WHERE user_id != ${req.user.id} ORDER BY random() LIMIT 1`,
+            { model: sequelize.models.Assignment });
+            const explanation = explanations[0];
             res.send(explanation);
         }
     );
@@ -36,8 +21,12 @@ module.exports = (app, sequelize) => {
         requireLogin,
         async (req, res) => {
 
-            const explanation = await sequelize.models.Explanation.findByPk(req.body.assignmentId);
-            const word = await sequelize.models.Word.findByPk(explanation.word_id);
+            console.log(req.body);
+            
+            const explanation = await sequelize.models.Assignment.findByPk(req.body.assignmentId);
+            console.log('explanation')
+            console.log(explanation)
+            const word = await sequelize.models.Word.findByPk(explanation.wordId);
 
             console.log('received guess ' + req.body.guess);
             console.log('word in english' + word.english);

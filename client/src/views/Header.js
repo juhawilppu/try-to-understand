@@ -57,7 +57,7 @@ class Header extends React.Component {
         return (
             <div className="header">
                 <span className="product-name" onClick={this.gotoCenter}>
-                    <Logo />
+                    <Logo wrap />
                 </span>
                 <span className="profile">
                     {this.renderContent()}

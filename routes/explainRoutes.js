@@ -2,8 +2,22 @@ const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = (app, sequelize) => {
 
+    const getRandomOptions = (wordId) => {
+        return sequelize
+        .query('SELECT * FROM words ORDER BY random() LIMIT 4',
+        { model: sequelize.models.Word });
+    }
+
+    // Not really in use, used for testing.
     app.get(
-        '/api/assignment/:language',
+        '/api/assignments/random',
+        requireLogin,
+        async (req, res) => {
+            res.send(await getRandomOptions(1));
+        });
+
+    app.get(
+        '/api/assignments/:language',
         requireLogin,
         async (req, res) => {
             const words = await sequelize.models.Word.findAll();
@@ -26,10 +40,10 @@ module.exports = (app, sequelize) => {
     );
 
     app.get(
-        '/api/explanations',
+        '/api/assignments',
         requireLogin,
         async (req, res) => {
-            const messages = await sequelize.models.Explanation.findAll({
+            const messages = await sequelize.models.Assignment.findAll({
                 where: {
                     user_id: req.user.id
                 },
@@ -40,12 +54,18 @@ module.exports = (app, sequelize) => {
     );
     
     app.post(
-        '/api/explanations',
+        '/api/assignments/:assignmentType',
         requireLogin,
         async (req, res) => {
-            const message = await sequelize.models.Explanation.build({
+
+            const options = req.params.assignmentType === 'TEXT_FREETEXT' ?
+                null :
+                await getRandomOptions(req.body.word_id);
+
+            const message = await sequelize.models.Assignment.build({
                 explanation: req.body.explanation,
                 word_id: req.body.word_id,
+                options: options ? options.map(o => o[req.body.language]).join(',') : null,
                 language: req.body.language,
                 user_id: req.user.id
             }).save();

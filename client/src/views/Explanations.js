@@ -10,7 +10,7 @@ class NewMessage extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/api/explanations').then(response => {
+        axios.get('/api/assignments').then(response => {
             this.setState({ loaded: true, explanations: response.data });
         }).catch(error => alert(error));
     }

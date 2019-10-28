@@ -7,23 +7,18 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Dashboard extends React.Component {
     state = {
-        loaded: false,
-        messages: []
-    }
-
-    componentDidMount() {
-        axios.get('/api/explanations')
-        .then(response => {
-            this.setState({ loaded: true, messages: response.data });
-        });
+        loaded: true
     }
 
     render() {
 
         const content = this.state.loaded ? (
             <div className="list">
-                <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/explain`)}>
-                    Explain
+                <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/explain/TEXT_FREETEXT`)}>
+                    Explain (freetext)
+                </Button>
+                <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/explain/TEXT_OPTIONS`)}>
+                    Explain (options)
                 </Button>
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/guess`)}>
                     Guess

@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        explanationId: {
+        assignmentId: {
             type: Sequelize.INTEGER
         },
         guess: {
@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         correct: {
             type: Sequelize.BOOLEAN
         },
-        user_id: {
+        userId: {
             type: Sequelize.INTEGER
         }
     }, {

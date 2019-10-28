@@ -14,7 +14,7 @@ class Guess extends React.Component {
     state = {
         loaded: false,
         understand: null,
-        content: '',
+        guess: '',
         answered: false,
         correct: false,
         correctAnswer: null,
@@ -25,10 +25,14 @@ class Guess extends React.Component {
         this.next();
     }
 
+    sendGuess = (option) => {
+        this.setState({ guess: option}, this.sendMessage);
+    }
+
     sendMessage = async () => {
         const dto = {
             assignmentId: this.state.understand.id,
-            guess: this.state.content
+            guess: this.state.guess
         }
         const response = await axios.post('/api/guess', dto);
 
@@ -42,7 +46,9 @@ class Guess extends React.Component {
     renderResult = () => (
         <div>
             <div className="common-info-box">
-                Your answer is {this.state.correct ? <span className="common-correct">Correct</span> : 'Wrong. It tried to describe a ' + this.state.correctAnswer + '.' }
+                Your answer is {this.state.correct ?
+                <span className="common-correct">Correct</span> :
+                <span>Wrong. It tried to describe a {this.state.correctAnswer}.</span> }
             </div>
             <Button variant="contained" color="primary" onClick={this.next}>Next</Button>
         </div>
@@ -56,40 +62,71 @@ class Guess extends React.Component {
     next = async () => {
         try {
             const response = await axios.get('/api/guess');
-            this.setState({ loaded: true, understand: response.data, answered: false, content: '' });
+            this.setState({ loaded: true, understand: response.data, answered: false, guess: '' });
         } catch (error) {
             this.setState({ error })
         }
     }
 
+    renderInputUi = () => {
+        console.log(this.state);
+        if (this.state.understand.options) {
+            return this.renderOptionsInput();
+        } else {
+            return this.renderTextInput();
+        }
+    }
+
+    renderTextInput = () => (
+        <React.Fragment>
+            <TextField
+                id="standard-title"
+                label={`Your guess`}
+                variant="outlined"
+                multiline
+                rows="1"
+                value={this.state.guess}
+                onChange={event => this.setState({ guess: event.target.value })}
+                margin="normal"
+                placeholder="Guess goes here"
+                autoFocus
+                fullWidth
+            />
+            <div style={{marginTop: '20px', display: 'flex', justifyguess: 'flex-end'}}>
+                <Button onClick={() => alert('not implemented')}>
+                    Report
+                </Button>
+                <Button variant="contained" color="primary" onClick={this.sendMessage}>
+                    Send
+                </Button>
+                <Button onClick={this.cancelMessage}>
+                    Skip
+                </Button>
+            </div>
+        </React.Fragment>
+    )
+
+    renderOptionsInput = () => (
+        <React.Fragment>
+            {this.state.understand.options.split(',').map(option => (
+                <Button variant="contained" color="primary" onClick={() => this.sendGuess(option)}>{option}</Button>
+            ))}
+            <div style={{marginTop: '20px', display: 'flex', justifyguess: 'flex-end'}}>
+            <Button variant="flat" onClick={() => alert('not implemented')}>
+                Report
+            </Button>
+            <Button onClick={this.cancelMessage}>
+                Skip
+            </Button>
+        </div>
+    </React.Fragment>
+    )
+
 
     renderGuess = () => (
         <div style={{marginTop: '50px'}}>
             <form noValidate autoComplete="off">
-                <TextField
-                    id="standard-title"
-                    label={`Your guess`}
-                    variant="outlined"
-                    multiline
-                    rows="1"
-                    value={this.state.content}
-                    onChange={event => this.setState({ content: event.target.value })}
-                    margin="normal"
-                    placeholder="Guess goes here"
-                    autoFocus
-                    fullWidth
-                />
-                <div style={{marginTop: '20px', display: 'flex', justifyContent: 'flex-end'}}>
-                <Button variant="flat" color="primary" style={styles.leftIcon} onClick={() => alert('not implemented')}>
-                        Report
-                    </Button>
-                    <Button variant="contained" color="primary" style={styles.leftIcon} onClick={this.sendMessage}>
-                        Send
-                    </Button>
-                    <Button variant="contained" onClick={this.cancelMessage}>
-                        Skip
-                    </Button>
-                </div>
+                {this.renderInputUi()}
             </form>
         </div>
     )
