@@ -30,6 +30,9 @@ class Dashboard extends React.Component {
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/user-profile`)}>
                     User profile
                 </Button>
+                <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/learderboards`)}>
+                    Leaderboards
+                </Button>
                 <br /><br />
                 <Button variant="contained" color="primary" onClick={() => this.props.history.push(`/admin`)}>
                     Admin

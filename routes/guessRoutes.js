@@ -23,24 +23,22 @@ module.exports = (app, sequelize) => {
 
             console.log(req.body);
             
-            const explanation = await sequelize.models.Assignment.findByPk(req.body.assignmentId);
-            console.log('explanation')
-            console.log(explanation)
-            const word = await sequelize.models.Word.findByPk(explanation.wordId);
+            const assignment = await sequelize.models.Assignment.findByPk(req.body.assignment_id);
+            const word = await sequelize.models.Word.findByPk(assignment.word_id);
 
             console.log('received guess ' + req.body.guess);
             console.log('word in english' + word.english);
-            console.log('guess language' + explanation.language);
+            console.log('guess language' + assignment.language);
 
-            const message = await sequelize.models.Guess.build({
-                explanationId: explanation.id,
+            const guess = await sequelize.models.Guess.build({
+                assignment_id: assignment.id,
                 guess: req.body.guess,
-                correct: word[explanation.language] === req.body.guess,
-                userId: req.user.id
+                correct: word[assignment.language] === req.body.guess,
+                user_id: req.user.id
             }).save();
             res.send({
-                correct: message.correct,
-                correctAnswer: word[explanation.language]
+                correct: guess.correct,
+                correctAnswer: word[assignment.language]
             });
         }
     );

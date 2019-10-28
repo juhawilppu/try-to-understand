@@ -8,14 +8,21 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        googleId: {
-            type: Sequelize.STRING(50)
+        username: {
+            type: Sequelize.STRING(32),
+            allowNull: false
+        },
+        google_id: {
+            type: Sequelize.STRING(64),
+            allowNull: false
         },
         email: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.STRING(64),
+            allowNull: false
         },
         language: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.STRING(64),
+            allowNull: false
         }
     }, {
         sequelize

@@ -2,36 +2,39 @@ const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = (app, sequelize) => {
 
-    const getRandomOptions = (wordId) => {
-        return sequelize
-        .query('SELECT * FROM words ORDER BY random() LIMIT 4',
-        { model: sequelize.models.Word });
+    const shuffleArray = array => {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
     }
 
-    // Not really in use, used for testing.
-    app.get(
-        '/api/assignments/random',
-        requireLogin,
-        async (req, res) => {
-            res.send(await getRandomOptions(1));
-        });
+    /**
+     * Get a random list of Words which also contains the given word.
+     */
+    const getRandomOptions = (wordId) => {
+        return sequelize
+        .query(`
+            (SELECT * FROM Words WHERE id != ${wordId} ORDER BY random() LIMIT 9)
+            UNION
+            (SELECT * FROM Words WHERE id = ${wordId})
+            `,
+        { model: sequelize.models.Word });
+    }
 
     app.get(
         '/api/assignments/:language',
         requireLogin,
         async (req, res) => {
-            const words = await sequelize.models.Word.findAll();
-            if (words.length === 0) {
-                return res.send({ message: 'No words on server'}, 404);
-            }
-
-            function random(mn, mx) {
-                return Math.random() * (mx - mn) + mn;  
-            } 
-            const word = words[Math.floor(random(0, words.length))];
+            const words = await sequelize.query(`
+            SELECT * FROM Words ORDER BY random() LIMIT 1
+            `, { model: sequelize.models.Word });
 
             const assignment = {
-                word,
+                word: words[0],
                 language: req.params.language
             }
 
@@ -60,13 +63,14 @@ module.exports = (app, sequelize) => {
 
             const options = req.params.assignmentType === 'TEXT_FREETEXT' ?
                 null :
-                await getRandomOptions(req.body.word_id);
+                shuffleArray(await getRandomOptions(req.body.word_id));
 
             const message = await sequelize.models.Assignment.build({
-                explanation: req.body.explanation,
+                answer: req.body.answer,
                 word_id: req.body.word_id,
                 options: options ? options.map(o => o[req.body.language]).join(',') : null,
                 language: req.body.language,
+                type: req.params.assignmentType,
                 user_id: req.user.id
             }).save();
             res.send(message);

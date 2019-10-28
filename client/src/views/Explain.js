@@ -46,8 +46,8 @@ class Explain extends React.Component {
     sendAnswer = async () => {
         clearInterval(this.state.timer);
         const dto = {
-            explanation: this.state.content,
-            wordId: this.state.assignment.wordId,
+            answer: this.state.content,
+            word_id: this.state.assignment.word.id,
             language: this.state.assignment.language
         }
         const response = await axios.post(`/api/assignments/${this.props.match.params.assignmentType}`, dto);

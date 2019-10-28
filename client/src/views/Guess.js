@@ -13,7 +13,7 @@ const styles = {
 class Guess extends React.Component {
     state = {
         loaded: false,
-        understand: null,
+        assignment: null,
         guess: '',
         answered: false,
         correct: false,
@@ -31,7 +31,7 @@ class Guess extends React.Component {
 
     sendMessage = async () => {
         const dto = {
-            assignmentId: this.state.understand.id,
+            assignment_id: this.state.assignment.id,
             guess: this.state.guess
         }
         const response = await axios.post('/api/guess', dto);
@@ -55,14 +55,14 @@ class Guess extends React.Component {
     )
 
     report = () => {
-        axios.post('/api/guess/report/' + this.state.understand._id);
+        axios.post('/api/guess/report/' + this.state.assignment._id);
         this.next();
     }
 
     next = async () => {
         try {
             const response = await axios.get('/api/guess');
-            this.setState({ loaded: true, understand: response.data, answered: false, guess: '' });
+            this.setState({ loaded: true, assignment: response.data, answered: false, guess: '' });
         } catch (error) {
             this.setState({ error })
         }
@@ -70,7 +70,7 @@ class Guess extends React.Component {
 
     renderInputUi = () => {
         console.log(this.state);
-        if (this.state.understand.options) {
+        if (this.state.assignment.options) {
             return this.renderOptionsInput();
         } else {
             return this.renderTextInput();
@@ -108,7 +108,7 @@ class Guess extends React.Component {
 
     renderOptionsInput = () => (
         <React.Fragment>
-            {this.state.understand.options.split(',').map(option => (
+            {this.state.assignment.options.split(',').map(option => (
                 <Button variant="contained" color="primary" onClick={() => this.sendGuess(option)}>{option}</Button>
             ))}
             <div style={{marginTop: '20px', display: 'flex', justifyguess: 'flex-end'}}>
@@ -158,10 +158,10 @@ class Guess extends React.Component {
                         Guess what this means:
                     </div>
                     <div className="word">
-                        {this.state.understand.explanation}
+                        {this.state.assignment.answer}
                     </div>
                     <div className="footer-for-word">
-                        as explained by user-{this.state.understand.user_id}
+                        as explained by user-{this.state.assignment.user_id}
                     </div>
                 </div>
                 {this.state.answered ? this.renderResult() : this.renderGuess() }

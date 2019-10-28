@@ -8,17 +8,21 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        assignmentId: {
-            type: Sequelize.INTEGER
+        assignment_id: {
+            type: Sequelize.INTEGER,
+            allowNull: false
         },
         guess: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.STRING(50),
+            allowNull: false
         },
         correct: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            allowNull: false
         },
-        userId: {
-            type: Sequelize.INTEGER
+        user_id: {
+            type: Sequelize.INTEGER,
+            allowNull: false
         }
     }, {
         sequelize

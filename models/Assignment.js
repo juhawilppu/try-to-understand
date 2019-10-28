@@ -8,11 +8,14 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        explanation: {
-            type: Sequelize.STRING(400)
+        answer: {
+            // The written answer provided by the user
+            type: Sequelize.STRING(500),
+            allowNull: false
         },
         word_id: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull: false
         },
         type: {
             /*
@@ -20,7 +23,8 @@ module.exports = (sequelize) => {
                 - TEXT_FREETEXT (Regular Alias type of assignment)
                 - TEXT_OPTIONS (Alias type of assignment with list of options for the receiver)
             */
-            type: Sequelize.STRING(128)
+            type: Sequelize.STRING(128),
+            allowNull: false
         },
         options: {
             /*
@@ -30,10 +34,12 @@ module.exports = (sequelize) => {
             type: Sequelize.STRING(256)
         },
         language: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.STRING(50),
+            allowNull: false
         },
         user_id: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull: false
         }
     }, {
         sequelize

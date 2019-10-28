@@ -39,10 +39,14 @@ module.exports = (app, sequelize) => {
                     done(null, existingUser);
                 } else {
                     // New user. Save it to db.
+
+                    // Get index for username (TODO)
+                    const lastUser = await sequelize.query(`SELECT * FROM Users ORDER BY id DESC LIMIT 1`, {model: sequelize.models.User});
+
                     const user = await sequelize.models.User.build({
-                        googleId: profile._json.sub,
+                        google_id: profile._json.sub,
+                        username: 'player-' + (lastUser.length > 0 ? lastUser[0].id + 1 : 1000),
                         email: profile._json.email,
-                        name: profile._json.name,
                         language: 'english'
                     }).save();
 

@@ -5,14 +5,15 @@ const Sequelize = require('sequelize');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
+const fs = require('fs');
 
 const sequelize = new Sequelize(keys.postgres.database, keys.postgres.username, keys.postgres.password, {
     host: keys.postgres.host,
     dialect: 'postgresql',
     define: {
         timestamps: true,
-        underscored: true,
-        paranoid: true
+        paranoid: true,
+        underscored: true
     },
     //force: true // This will DROP tables and rebuild schema
 });
@@ -34,7 +35,7 @@ require('./models/Guess')(sequelize);
 require('./models/Assignment')(sequelize);
 
 require('./routes/authRoutes')(app, sequelize);
-require('./routes/explainRoutes')(app, sequelize);
+require('./routes/assignmentRoutes')(app, sequelize);
 require('./routes/guessRoutes')(app, sequelize);
 require('./routes/adminRoutes')(app, sequelize);
 
@@ -53,6 +54,29 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
+
+const populateWordsIfEmpty = async () => {
+    const words = await sequelize.query('SELECT * FROM Words', {model: sequelize.models.Word});
+    if (words.length > 0) {
+        return;
+    }
+
+    fs.readFile('./config/words.txt', 'utf8', function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            const words = data.split('\n');
+            words.map(b => {
+                sequelize.models.Word.build({
+                    english: b,
+                    user_id: -1
+                }).save();
+            });
+        }
+    })
+}
+
 sequelize.sync().then(() => {
+    populateWordsIfEmpty();
     app.listen(PORT)
 });

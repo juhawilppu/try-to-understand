@@ -9,10 +9,12 @@ module.exports = (sequelize) => {
             autoIncrement: true
         },
         english: {
-            type: Sequelize.STRING(256)
+            type: Sequelize.STRING(256),
+            allowNull: false
         },
         user_id: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull: false
         }
     }, {
         sequelize
