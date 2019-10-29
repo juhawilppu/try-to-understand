@@ -38,6 +38,7 @@ require('./routes/authRoutes')(app, sequelize);
 require('./routes/assignmentRoutes')(app, sequelize);
 require('./routes/guessRoutes')(app, sequelize);
 require('./routes/adminRoutes')(app, sequelize);
+require('./routes/leaderboardRoutes')(app, sequelize);
 
 require('./services/passportConfig')(app, sequelize);
 

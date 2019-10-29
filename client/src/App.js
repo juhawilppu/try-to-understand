@@ -3,7 +3,6 @@ import './App.css';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Header from './views/Header';
 import Landing from './views/Landing';
@@ -15,24 +14,12 @@ import Admin from './views/Admin';
 import AdminAddWord from './views/AdminAddWord';
 import Guess from './views/Guess';
 import UserProfile from './views/UserProfile';
+import Leaderboards from './views/Leaderboards';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-        main: '#E91E63'
-    },
-    secondary: {
-        main: '#8BC34A'
-    }
-  }
-});
-
-// eslint-disable-next-line
 String.prototype.replaceAll = function(search, replacement) {
   var target = this;
   return target.split(search).join(replacement);
 };
-// eslint-disable-next-line
 String.prototype.trim = function(character) {
   var target = this;
   return target.replaceAll(character, '')
@@ -70,6 +57,7 @@ class App extends Component {
               <Route path="/explain/:assignmentType" exact component={Explain} />
               <Route path="/guess" exact component={Guess} />
               <Route path="/explanations" exact component={Explanations} />
+              <Route path="/leaderboards" exact component={Leaderboards} />
               <Route path="/admin" exact component={Admin} />
               <Route path="/admin/add-word" exact component={AdminAddWord} />
               <Route path="/user-profile" exact component={UserProfile} />
@@ -79,7 +67,6 @@ class App extends Component {
 
     return (
       <div className="container">
-        <MuiThemeProvider theme={theme}>
           <BrowserRouter>
             <React.Fragment>
               <Header />
@@ -91,7 +78,6 @@ class App extends Component {
               </div>
             </React.Fragment>
           </BrowserRouter>
-        </MuiThemeProvider>
       </div>
     );
   }

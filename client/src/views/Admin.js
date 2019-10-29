@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import TButton from 'components/TButton';
 
-class NewMessage extends React.Component {
+class Admin extends React.Component {
     state = {
         loaded: false,
         words: []
@@ -57,4 +57,4 @@ class NewMessage extends React.Component {
     }
 }
 
-export default withRouter(NewMessage);
+export default withRouter(Admin);
