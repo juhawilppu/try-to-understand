@@ -11,7 +11,7 @@ const TButton = props => {
     }
 
     return (
-        <button key={props.key} className={type} onClick={props.onClick}>
+        <button className={type} onClick={props.onClick}>
             {props.children}
         </button>
     )

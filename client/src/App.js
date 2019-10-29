@@ -97,7 +97,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (val : any) => {
+const mapStateToProps = (val) => {
   return { auth: val.auth };
 }
 

@@ -1,24 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Logo from '../common/Logo';
-
-const theme = createMuiTheme({
-    overrides: {
-        MuiButton: {
-            text: {
-                color: 'white'
-            }
-        }
-    },
-    palette: {
-      primary: {
-          main: '#FFFFFF'
-      }
-    }
-});
+import TButton from 'components/TButton';
 
 class Header extends React.Component {
 
@@ -28,17 +12,15 @@ class Header extends React.Component {
                 return '...';
             case false:
                 return (
-                    <MuiThemeProvider theme={theme}>
-                        <Button href="/auth/google" color="primary">Login with Google</Button>
-                    </MuiThemeProvider>
+                    <div>
+                        <TButton href="/auth/google" color="primary">Login with Google</TButton>
+                    </div>
                 )
             default:
                 return (
                     <React.Fragment>
                         <span style={{marginRight: '20px'}} onClick={this.gotoProfile}>{this.props.auth.username}</span>
-                        <MuiThemeProvider theme={theme}>
-                            <Button color="primary" href="/api/logout">Logout</Button>
-                        </MuiThemeProvider>
+                        <TButton href="/api/logout">Logout</TButton>
                     </React.Fragment>
                 )
         }

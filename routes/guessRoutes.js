@@ -12,7 +12,10 @@ module.exports = (app, sequelize) => {
             const explanations = await sequelize.query(`SELECT * FROM Assignments WHERE user_id != ${req.user.id} ORDER BY random() LIMIT 1`,
             { model: sequelize.models.Assignment });
             const explanation = explanations[0];
-            res.send(explanation);
+
+            const user = await sequelize.models.User.findByPk(explanation.user_id);
+
+            res.send({explanation, user});
         }
     );
 

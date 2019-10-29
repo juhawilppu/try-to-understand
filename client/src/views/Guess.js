@@ -21,12 +21,12 @@ class Guess extends React.Component {
     }
 
     sendGuess = (option) => {
-        this.setState({ guess: option}, this.sendMessage);
+        this.setState({ guess: option }, this.sendMessage);
     }
 
     sendMessage = async () => {
         const dto = {
-            assignment_id: this.state.assignment.id,
+            assignment_id: this.state.assignment.explanation.id,
             guess: this.state.guess
         }
         const response = await axios.post('/api/guess', dto);
@@ -45,12 +45,12 @@ class Guess extends React.Component {
                 <span className="common-correct">Correct</span> :
                 <span>Wrong. It tried to describe a {this.state.correctAnswer}.</span> }
             </div>
-            <Button variant="contained" color="primary" onClick={this.next}>Next</Button>
+            <TButton onClick={this.next}>Next</TButton>
         </div>
     )
 
     report = () => {
-        axios.post('/api/guess/report/' + this.state.assignment._id);
+        axios.post('/api/guess/report/' + this.state.assignment.explanation._id);
         this.next();
     }
 
@@ -64,7 +64,7 @@ class Guess extends React.Component {
     }
 
     renderInputUi = () => {
-        if (this.state.assignment.options) {
+        if (this.state.assignment.explanation.options) {
             return this.renderOptionsInput();
         } else {
             return this.renderTextInput();
@@ -101,7 +101,7 @@ class Guess extends React.Component {
     )
 
     getOptions = firstHalf => {
-        const splitted = this.state.assignment.options.split(',');
+        const splitted = this.state.assignment.explanation.options.split(',');
         return splitted.filter((o, index) => (index < splitted.length/2) === firstHalf);
     }
 
@@ -131,13 +131,12 @@ class Guess extends React.Component {
 
     renderGuess = () => (
         <div style={{marginTop: '50px'}}>
-            <form noValidate autoComplete="off">
-                {this.renderInputUi()}
-            </form>
+            {this.renderInputUi()}
         </div>
     )
 
     render() {
+        console.log('render');
 
         if (this.state.error) {
             return (
@@ -164,10 +163,10 @@ class Guess extends React.Component {
                         Guess what this means:
                     </div>
                     <div className="word">
-                        {this.state.assignment.answer}
+                        {this.state.assignment.explanation.answer}
                     </div>
                     <div className="footer-for-word">
-                        as explained by user-{this.state.assignment.user_id}
+                        as explained by {this.state.assignment.user.username}
                     </div>
                 </div>
                 {this.state.answered ? this.renderResult() : this.renderGuess() }
