@@ -59,9 +59,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
-
 const populateWordsIfEmpty = async () => {
-    const words = await sequelize.query('SELECT * FROM Words', {model: sequelize.models.Word});
+    const words = await sequelize.query('SELECT * FROM words', {model: sequelize.models.Word});
     if (words.length > 0) {
         return;
     }
@@ -70,18 +69,16 @@ const populateWordsIfEmpty = async () => {
         if (err) {
             console.log(err);
         } else {
-            const words = data.split('\n');
-            words.map(b => {
-                sequelize.models.Word.build({
+            const words = data.split('\n').map(b => {
+                return {
                     english: b,
                     user_id: -1
-                }).save();
-            });
+                }
+            })
+            sequelize.models.Word.bulkCreate(words);
         }
     })
 }
 
-sequelize.sync().then(() => {
-    populateWordsIfEmpty();
-    app.listen(PORT)
-});
+populateWordsIfEmpty();
+app.listen(PORT);
