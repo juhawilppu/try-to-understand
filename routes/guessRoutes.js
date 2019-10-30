@@ -4,12 +4,19 @@ const Op = Sequlize.Op;
 
 module.exports = (app, sequelize) => {
 
+    /*
+        Get an explanation randomly from some user other than myself.
+        Skip if already answered.
+    */
     app.get(
         '/api/guess',
         requireLogin,
         async (req, res) => {
-            // Get an explanation randomly from some user other than myself
-            const explanations = await sequelize.query(`SELECT * FROM Assignments WHERE user_id != ${req.user.id} ORDER BY random() LIMIT 1`,
+            const explanations = await sequelize.query(`
+                select * from Assignments where user_id != ${req.user.id}
+                and id not in (select assignment_id from guesses where user_id=${req.user.id})
+                order by random() limit 1
+            `,
             { model: sequelize.models.Assignment });
             const explanation = explanations[0];
 
