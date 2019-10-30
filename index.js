@@ -7,6 +7,10 @@ const passport = require('passport');
 const keys = require('./config/keys');
 const fs = require('fs');
 
+Array.prototype.unique = function() {
+    return [...new Set(this)]
+}
+
 const sequelize = new Sequelize(keys.postgres.database, keys.postgres.username, keys.postgres.password, {
     host: keys.postgres.host,
     dialect: 'postgresql',

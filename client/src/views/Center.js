@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
             option('Guess', 'Guess what others tried to explain', '/guess'),
             option('Results', 'See results for your explanations', '/explanations'),
             option('Profile', 'See your profile', '/user-profile'),
-            option('Leaderboard', 'See the champions', '/leaderboards'),
+            option('Leaderboards', 'See the champions', '/leaderboards'),
             option('Admin', 'Modify words', '/admin')
         ]
 

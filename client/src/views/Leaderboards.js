@@ -21,15 +21,21 @@ class Leaderboards extends React.Component {
                 <table>
                     <thead>
                         <tr>
-                            <th>User</th>
+                            <th>#</th>
+                            <th>Player</th>
                             <th>As explainer</th>
+                            <th>As guesser</th>
+                            <th>Total score</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.loaded && this.state.rows.map(row => 
+                        {this.state.loaded && this.state.rows.map((row, index) => 
                             <tr key={row.username}>
+                                <td>{index+1}</td>
                                 <td>{row.username}</td>
-                                <td>{row.explainer_correct_guesses}/{row.explainer_all_guesses}</td>
+                                <td>{row.explains_correct}/{row.explains_all}</td>
+                                <td>{row.guesses_correct}/{row.guesses_all}</td>
+                                <td>{row.total_score}</td>
                             </tr>
                         )}
                     </tbody>
