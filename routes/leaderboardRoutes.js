@@ -39,7 +39,7 @@ module.exports = (app, sequelize) => {
             left join explains on (u.username = explains.username)
             left join guesses on (u.username = guesses.username)
             ${usernameFilter}
-            order by total_score;
+            order by total_score desc;
         `);
         return list[0]; // the query returns some weird nested array
     }

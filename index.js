@@ -59,26 +59,4 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
-const populateWordsIfEmpty = async () => {
-    const words = await sequelize.query('SELECT * FROM words', {model: sequelize.models.Word});
-    if (words.length > 0) {
-        return;
-    }
-
-    fs.readFile('./config/words.txt', 'utf8', function(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            const words = data.split('\n').map(b => {
-                return {
-                    english: b,
-                    user_id: -1
-                }
-            })
-            sequelize.models.Word.bulkCreate(words);
-        }
-    })
-}
-
-populateWordsIfEmpty();
 app.listen(PORT);

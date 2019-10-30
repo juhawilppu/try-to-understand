@@ -116,7 +116,7 @@ class Explain extends React.Component {
                         value={this.state.content}
                         onChange={event => this.change(event.target.value)}
                         onKeyDown={this.onKeyDown}
-                        maxLength={40}
+                        maxLength={400}
                         autoFocus
                     />
                     {!this.state.allowed && <div className="common-red">You are trying to cheat. Please stop.</div>}
