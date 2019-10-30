@@ -104,37 +104,37 @@ class Explain extends React.Component {
                 <h2>Explain</h2>
                 <div>
                     <div className="header-for-word">
-                        Please explain this word
+                        Try to explain...
                     </div>
                     <div className="word-to-explain">
                         {this.state.assignment.word[this.state.assignment.language]}
                     </div>
                 </div>
-                <div className="time-remaining">
-                    Time remaining: {this.state.time}
-                </div>
-                {this.state.time < 0 &&
-                    <div style={{ color: 'red' }}>
-                        Time is up!
-                    </div>
-                }
                 <div style={{ marginTop: '50px' }}>
                     <TTextfield
                         rows={6}
                         value={this.state.content}
                         onChange={event => this.change(event.target.value)}
                         onKeyDown={this.onKeyDown}
-                        placeholder="Explain the given word so that another person can guess the word. It's not allowed to mention the given word."
+                        maxLength={40}
                         autoFocus
                     />
-                    {!this.state.allowed && <div style={{ color: 'red' }}>You are trying to cheat. Please stop.</div>}
-                    <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-                        <TButton onClick={this.sendAnswer}>
-                            Send
-                        </TButton>
-                        <TButton flat onClick={this.cancelMessage}>
-                            Quit
-                        </TButton>
+                    {!this.state.allowed && <div className="common-red">You are trying to cheat. Please stop.</div>}
+                    <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
+                        <div className="time-remaining">
+                            Time remaining: {this.state.time > 0 ?
+                                <span>{this.state.time}</span> :
+                                <span className="common-red">Time is up</span>
+                            }
+                        </div>
+                        <span>
+                            <TButton onClick={this.sendAnswer}>
+                                Send
+                            </TButton>
+                            <TButton flat onClick={this.cancelMessage}>
+                                Quit
+                            </TButton>
+                        </span>
                     </div>
                 </div>
             </div>

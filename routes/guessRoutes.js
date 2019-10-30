@@ -12,7 +12,7 @@ module.exports = (app, sequelize) => {
         requireLogin,
         async (req, res) => {
             const explanations = await sequelize.query(`
-                select * from Assignments where user_id != ${req.user.id}
+                select * from assignments where user_id != ${req.user.id}
                 and downvotes < 2
                 and id not in (select assignment_id from guesses where user_id=${req.user.id})
                 order by random() limit 1

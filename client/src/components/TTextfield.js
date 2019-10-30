@@ -11,6 +11,7 @@ const TTextfield = props => {
             onKeyDown={props.onKeyDown}
             onChange={props.onChange}
             autoFocus={props.autoFocus}
+            maxLength={props.maxLength}
         />
     )
 }

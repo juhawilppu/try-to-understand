@@ -35,20 +35,18 @@ body {
 }
 
 .explain-view .header-for-word {
-  font-size: 15px;
+  font-size: 20px;
+  text-align: center;
 }
 
 .explain-view .word-to-explain {
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 27px;
   margin-top: 10px;
   margin-bottom: 10px;
+  text-align: center;
+  padding: 10px;
+  background: #B3E5FC;
 }
-
-.explain-view .time-remaining {
-  margin-top: 20px;
-}
-
 
 .guess-view .word {
   font-size: 30px;
@@ -73,12 +71,15 @@ table th {
 .common-info-box {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-weight: bold;
 }
 
 .common-correct {
   color: green;
   font-weight: bold;
+}
+
+.common-red {
+  color: #F50057;
 }
 
 
@@ -229,4 +230,8 @@ table th, table td {
 
 .landing-page button {
   margin-top: 100px;
+}
+
+.margin-top-m {
+  margin-top: 50px;
 }

@@ -1,20 +1,9 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import TButton from 'components/TButton';
-import axios from 'axios';
 
 class Explanations extends React.Component {
-    state = {
-        loaded: false,
-        explanations: []
-    }
-
-    componentDidMount() {
-        axios.get('/api/assignments').then(response => {
-            this.setState({ loaded: true, explanations: response.data });
-        }).catch(error => alert(error));
-    }
-
+    
     gotoExplain = () => {
         this.props.history.push('/explain');
     }
@@ -36,7 +25,7 @@ class Explanations extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.state.explanations.map((exp) => {
+                {this.props.explanations.map((exp) => {
                     const guesses = exp.Guesses.length;
                     const correct = exp.Guesses.filter(g => g.correct).length;
                     return (
@@ -54,15 +43,11 @@ class Explanations extends React.Component {
     )
 
     render() {
-        if (!this.state.loaded) {
-            return <span>...</span>
-        }
-
         return (
             <div style={{width: '500px'}} className="explain-view">
                 <h2>My explanations</h2>
 
-                {this.state.explanations.length === 0 ?
+                {this.props.explanations.length === 0 ?
                     this.renderCallToAction() :
                     this.renderTable()}
             </div>

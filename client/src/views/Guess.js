@@ -44,7 +44,9 @@ class Guess extends React.Component {
                 <span className="common-correct">Correct</span> :
                 <span>Wrong. It tried to describe a {this.state.correctAnswer}.</span> }
             </div>
-            <TButton onClick={this.next}>Next</TButton>
+            <div className="margin-top-m">
+                <TButton onClick={this.next}>Next</TButton>
+            </div>
         </div>
     )
 
@@ -86,7 +88,7 @@ class Guess extends React.Component {
                 fullWidth
             />
             <div style={{marginTop: '20px', display: 'flex', justifyguess: 'flex-end'}}>
-                <TButton onClick={() => alert('not implemented')}>
+                <TButton flat onClick={this.report}>
                     Report
                 </TButton>
                 <TButton onClick={this.sendMessage}>
@@ -138,6 +140,10 @@ class Guess extends React.Component {
         </div>
     )
 
+    gotoExplain = () => {
+        this.props.history.push('/explain/TEXT_OPTIONS');
+    }
+
     render() {
         console.log('render');
 
@@ -145,7 +151,11 @@ class Guess extends React.Component {
             return (
                 <div style={{width: '500px'}} className="explain-view">
                     <h2>Guess</h2>
-                    <div className="common-info-box">No explanations found. You need to wait a bit for other users to write them.</div>
+                    <div className="common-info-box">
+                        <p>No explanations found. You need to wait a bit for other users to write them.</p>
+                        <p>While waiting, you can explain some words yourself.</p>
+                        <TButton onClick={this.gotoExplain}>Explain</TButton>
+                    </div>
                 </div>
             )
         }

@@ -26,6 +26,20 @@ module.exports = (app, sequelize) => {
     }
 
     app.get(
+        '/api/assignments/me',
+        requireLogin,
+        async (req, res) => {
+            const messages = await sequelize.models.Assignment.findAll({
+                where: {
+                    user_id: req.user.id
+                },
+                include: [sequelize.models.Word, sequelize.models.Guess]
+            })
+            res.send(messages);
+        }
+    );
+
+    app.get(
         '/api/assignments/:language',
         requireLogin,
         async (req, res) => {
@@ -39,20 +53,6 @@ module.exports = (app, sequelize) => {
             }
 
             res.send(assignment);
-        }
-    );
-
-    app.get(
-        '/api/assignments',
-        requireLogin,
-        async (req, res) => {
-            const messages = await sequelize.models.Assignment.findAll({
-                where: {
-                    user_id: req.user.id
-                },
-                include: [sequelize.models.Word, sequelize.models.Guess]
-            })
-            res.send(messages);
         }
     );
     

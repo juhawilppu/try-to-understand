@@ -11,16 +11,21 @@ class UserProfile extends React.Component {
     state = {
         loaded: null,
         results: null,
-        learning: null
+        learning: null,
+        explanations: null
     }
 
     componentDidMount() {
-        axios.get('/api/leaderboards/me').then(response => {
+        Promise.all([
+            axios.get('/api/leaderboards/me'),
+            axios.get('/api/assignments/me')
+        ]).then(response => {
             this.setState({
                 loaded: true,
                 learning: this.props.auth.language,
-                results: response.data
-        })
+                results: response[0].data,
+                explanations: response[1].data
+            })
         }).catch(error => alert(error));
     }
 
@@ -57,23 +62,28 @@ class UserProfile extends React.Component {
             <div style={{ width: '500px' }} className="explain-view">
                 <h2>User profile</h2>
                 <div>
+                    <p>Total words explained: {this.state.explanations.length}</p>
                     <h3>Explain</h3>
-                    {this.row(`Correct guesses received from others`, results.explains_correct)}
-                    {this.row(`Total guesses received from others`, results.explains_all)}
+                    {this.row(`Understood`, results.explains_correct)}
+                    {this.row(`Total guesses`, results.explains_all)}
 
                     <h3>Guess</h3>
-                    {this.row(`Correct guesses by you`, results.guesses_correct)}
-                    {this.row(`Total guesses by you`, results.guesses_all)}
+                    {this.row(`Correct guesses from you`, results.guesses_correct)}
+                    {this.row(`Total guesses`, results.guesses_all)}
                 </div>
-                <Explanations />
-                <div style={{marginTop: 30}}>
-                    <strong>Learning:</strong> <Select
-                        value={selectedOption}
-                        onChange={this.handleChange}
-                        options={options}
-                    /> <br />
-                    <TButton onClick={this.save}>Save</TButton>
-                </div>
+                <Explanations explanations={this.state.explanations} />
+                {false &&
+                    <React.Fragment>
+                        <div style={{marginTop: 30}}>
+                            <strong>Learning:</strong> <Select
+                                value={selectedOption}
+                                onChange={this.handleChange}
+                                options={options}
+                            /> <br />
+                            <TButton onClick={this.save}>Save</TButton>
+                        </div>
+                    </React.Fragment>
+                }
             </div>
         )
     }
