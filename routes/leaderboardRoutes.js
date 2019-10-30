@@ -14,7 +14,7 @@ module.exports = (app, sequelize) => {
                     select
                         username,
                         count(g.correct) filter (where g.correct = true) as correct,
-                        count(*) as all
+                        count(g.correct) as all
                     from users u
                     left join assignments e on (u.id = e.user_id)
                     left join guesses g on (e.id = g.assignment_id)
@@ -24,7 +24,7 @@ module.exports = (app, sequelize) => {
                     select
                         username,
                         count(g.correct) filter (where g.correct = true) as correct,
-                        count(*) as all
+                        count(g.correct) as all
                     from users u
                     left join guesses g on (u.id = g.user_id)
                     group by username
