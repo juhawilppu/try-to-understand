@@ -10,8 +10,16 @@ const TButton = props => {
         type = 'secondary';
     }
 
+    const click = () => {
+        if (props.onClick) {
+            props.onClick();
+        } else if (props.href) {
+            window.location = props.href;
+        }
+    }
+
     return (
-        <button className={type} onClick={props.onClick}>
+        <button className={type} onClick={click} >
             {props.children}
         </button>
     )

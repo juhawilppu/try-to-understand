@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Button } from '@material-ui/core'
+import TButton from 'components/TButton';
 import axios from 'axios';
 
 class Explanations extends React.Component {
@@ -22,7 +22,7 @@ class Explanations extends React.Component {
     renderCallToAction = () => (
         <div>
             <div className="common-info-box">You have no explanations.</div>
-            <Button variant="contained" color="primary" onClick={this.gotoExplain}>Go explain things!</Button>
+            <TButton onClick={this.gotoExplain}>Go explain things!</TButton>
         </div>
     )
 

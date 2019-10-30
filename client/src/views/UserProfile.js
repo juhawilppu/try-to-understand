@@ -29,7 +29,7 @@ class UserProfile extends React.Component {
     }
 
     save = () => {
-        this.props.saveUser({language: this.state.learning});
+        this.props.saveUser({ username: this.props.auth.username, language: this.state.learning });
     }
 
     row = (header, value) => (

@@ -25,12 +25,11 @@ module.exports = (app, sequelize) => {
     });
 
     app.put('/api/current_user', async (req, res) => {
-        const user = await sequelize.models.User.findOne({
-            where: {
-                id: req.user.id
-            }
-        });
+        const user = await sequelize.models.User.findByPk(req.user.id);
         user.language = req.body.language;
+        user.username = req.body.username;
+        console.log(user)
+        console.log('saving.....................')
         user.save();
         res.send(user);
     });

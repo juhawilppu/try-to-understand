@@ -49,7 +49,7 @@ class Guess extends React.Component {
     )
 
     report = () => {
-        axios.post('/api/guess/report/' + this.state.assignment.explanation._id);
+        axios.post('/api/guess/report/' + this.state.assignment.explanation.id);
         this.next();
     }
 
@@ -99,25 +99,29 @@ class Guess extends React.Component {
         </React.Fragment>
     )
 
-    getOptions = firstHalf => {
-        const splitted = this.state.assignment.explanation.options.split(',');
-        return splitted.filter((o, index) => (index < splitted.length/2) === firstHalf);
+    getOptions = (index) => {
+        return this.state.assignment.explanation.options.split(',').slice(index*3, 3);
     }
 
     renderOptionsInput = () => (
         <React.Fragment>
             <div className="options-list">
-                {this.getOptions(true).map(option => (
+                {this.getOptions(0).map(option => (
                     <TButton key={option} onClick={() => this.sendGuess(option)}>{option}</TButton>
                 ))}
             </div>
             <div className="options-list">
-                {this.getOptions(false).map(option => (
+                {this.getOptions(1).map(option => (
+                    <TButton key={option} onClick={() => this.sendGuess(option)}>{option}</TButton>
+                ))}
+            </div>
+            <div className="options-list">
+                {this.getOptions(2).map(option => (
                     <TButton key={option} onClick={() => this.sendGuess(option)}>{option}</TButton>
                 ))}
             </div>
             <div style={{marginTop: '200px', display: 'flex', justifyContent: 'flex-end'}}>
-                <TButton flat onClick={() => alert('not implemented')}>
+                <TButton flat onClick={this.report}>
                     Report
                 </TButton>
                 <TButton flat onClick={this.next}>

@@ -119,26 +119,23 @@ class Explain extends React.Component {
                     </div>
                 }
                 <div style={{ marginTop: '50px' }}>
-                    <form noValidate autoComplete="off">
-                        <TTextfield
-                            label={`Explain (${this.state.content.length}/400)`}
-                            rows={6}
-                            value={this.state.content}
-                            onChange={event => this.change(event.target.value)}
-                            onKeyDown={this.onKeyDown}
-                            placeholder="Explain the given word so that another person can guess the word. It's not allowed to mention the given word."
-                            autoFocus
-                        />
-                        {!this.state.allowed && <div style={{ color: 'red' }}>You are trying to cheat. Please stop.</div>}
-                        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-                            <TButton onClick={this.sendAnswer}>
-                                Send
-                            </TButton>
-                            <TButton flat onClick={this.cancelMessage}>
-                                Quit
-                            </TButton>
-                        </div>
-                    </form>
+                    <TTextfield
+                        rows={6}
+                        value={this.state.content}
+                        onChange={event => this.change(event.target.value)}
+                        onKeyDown={this.onKeyDown}
+                        placeholder="Explain the given word so that another person can guess the word. It's not allowed to mention the given word."
+                        autoFocus
+                    />
+                    {!this.state.allowed && <div style={{ color: 'red' }}>You are trying to cheat. Please stop.</div>}
+                    <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+                        <TButton onClick={this.sendAnswer}>
+                            Send
+                        </TButton>
+                        <TButton flat onClick={this.cancelMessage}>
+                            Quit
+                        </TButton>
+                    </div>
                 </div>
             </div>
         )

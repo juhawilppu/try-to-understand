@@ -15,6 +15,8 @@ import AdminAddWord from './views/AdminAddWord';
 import Guess from './views/Guess';
 import UserProfile from './views/UserProfile';
 import Leaderboards from './views/Leaderboards';
+import Username from './views/Username';
+import { userInfo } from 'os';
 
 String.prototype.replaceAll = function(search, replacement) {
   var target = this;
@@ -50,19 +52,27 @@ class App extends Component {
         )
         break;
       default: // User is logged in
-          routes = (
-            <React.Fragment>
-              <Route path="/" exact component={Center} />
-              <Route path="/center" exact component={Center} />
-              <Route path="/explain/:assignmentType" exact component={Explain} />
-              <Route path="/guess" exact component={Guess} />
-              <Route path="/explanations" exact component={Explanations} />
-              <Route path="/leaderboards" exact component={Leaderboards} />
-              <Route path="/admin" exact component={Admin} />
-              <Route path="/admin/add-word" exact component={AdminAddWord} />
-              <Route path="/user-profile" exact component={UserProfile} />
-            </React.Fragment>
-          )
+
+          // If username has been set, proceed
+          if (this.props.auth.username) {
+            routes = (
+              <React.Fragment>
+                <Route path="/" exact component={Center} />
+                <Route path="/center" exact component={Center} />
+                <Route path="/explain/:assignmentType" exact component={Explain} />
+                <Route path="/guess" exact component={Guess} />
+                <Route path="/explanations" exact component={Explanations} />
+                <Route path="/leaderboards" exact component={Leaderboards} />
+                <Route path="/admin" exact component={Admin} />
+                <Route path="/admin/add-word" exact component={AdminAddWord} />
+                <Route path="/user-profile" exact component={UserProfile} />
+              </React.Fragment>
+            )
+          } else {
+            routes = (
+              <Route path="/" component={Username} />
+            )
+          }
     }
 
     return (

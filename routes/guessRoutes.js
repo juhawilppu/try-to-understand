@@ -46,4 +46,18 @@ module.exports = (app, sequelize) => {
         }
     );
 
+    app.post(
+        '/api/guess/report/:assignmentId',
+        requireLogin,
+        async (req, res) => {            
+            const assignment = await sequelize.models.Assignment.findByPk(req.params.assignmentId);
+            assignment.downvotes = assignment.downvotes + 1;
+            assignment.save();
+
+            res.send({
+                message: 'Downvoted'
+            });
+        }
+    );
+
 }

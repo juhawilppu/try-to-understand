@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import TButton from 'components/TButton';
 import Logo from '../common/Logo';
 
 const Landing  = () => (
@@ -7,8 +7,10 @@ const Landing  = () => (
       <h2>
         <Logo />
       </h2>
-      <div>The next-generation language learning tool</div>
-      <div style={{marginTop: '50px'}}><Button href="/auth/google" variant="contained" color="primary">Login with Google</Button></div>
+      <div>The social language learning tool</div>
+      <div style={{marginTop: '50px'}}>
+        <TButton href="/auth/google">Login with Google</TButton>
+      </div>
     </div>
 )
 

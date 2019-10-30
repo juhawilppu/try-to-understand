@@ -9,8 +9,7 @@ module.exports = (sequelize) => {
             autoIncrement: true
         },
         username: {
-            type: Sequelize.STRING(32),
-            allowNull: false
+            type: Sequelize.STRING(32)
         },
         google_id: {
             type: Sequelize.STRING(64),

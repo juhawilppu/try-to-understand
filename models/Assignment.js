@@ -37,6 +37,10 @@ module.exports = (sequelize) => {
             type: Sequelize.STRING(50),
             allowNull: false
         },
+        downvotes: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
         user_id: {
             type: Sequelize.INTEGER,
             allowNull: false

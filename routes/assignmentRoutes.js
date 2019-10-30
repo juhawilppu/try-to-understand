@@ -18,7 +18,7 @@ module.exports = (app, sequelize) => {
     const getRandomOptions = (wordId) => {
         return sequelize
         .query(`
-            (SELECT * FROM Words WHERE id != ${wordId} ORDER BY random() LIMIT 9)
+            (SELECT * FROM Words WHERE id != ${wordId} ORDER BY random() LIMIT 8)
             UNION
             (SELECT * FROM Words WHERE id = ${wordId})
             `,
@@ -71,6 +71,7 @@ module.exports = (app, sequelize) => {
                 options: options ? options.map(o => o[req.body.language]).join(',') : null,
                 language: req.body.language,
                 type: req.params.assignmentType,
+                downvotes: 0,
                 user_id: req.user.id
             }).save();
             res.send(message);
