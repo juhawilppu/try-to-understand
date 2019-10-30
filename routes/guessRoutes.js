@@ -13,9 +13,13 @@ module.exports = (app, sequelize) => {
             { model: sequelize.models.Assignment });
             const explanation = explanations[0];
 
-            const user = await sequelize.models.User.findByPk(explanation.user_id);
+            if (explanation) {
+                const user = await sequelize.models.User.findByPk(explanation.user_id);
+                res.send({explanation, user});
+            } else {
+                res.send({message: 'Not explanations found'}, 404);
+            }
 
-            res.send({explanation, user});
         }
     );
 

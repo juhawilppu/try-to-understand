@@ -100,7 +100,7 @@ class Guess extends React.Component {
     )
 
     getOptions = (index) => {
-        return this.state.assignment.explanation.options.split(',').slice(index*3, 3);
+        return this.state.assignment.explanation.options.split(',').slice(index*3, index*3+3);
     }
 
     renderOptionsInput = () => (
