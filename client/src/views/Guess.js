@@ -116,15 +116,15 @@ class Guess extends React.Component {
                     <TButton key={option} onClick={() => this.sendGuess(option)}>{option}</TButton>
                 ))}
             </div>
-            <div style={{marginTop: '20px', display: 'flex', justifyguess: 'flex-end'}}>
-            <TButton flat onClick={() => alert('not implemented')}>
-                Report
-            </TButton>
-            <TButton flat onClick={this.cancelMessage}>
-                Skip
-            </TButton>
-        </div>
-    </React.Fragment>
+            <div style={{marginTop: '200px', display: 'flex', justifyContent: 'flex-end'}}>
+                <TButton flat onClick={() => alert('not implemented')}>
+                    Report
+                </TButton>
+                <TButton flat onClick={this.next}>
+                    Skip
+                </TButton>
+            </div>
+        </React.Fragment>
     )
 
 

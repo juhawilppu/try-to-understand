@@ -32,8 +32,7 @@ class Explanations extends React.Component {
                 <tr>
                     <th>Language</th>
                     <th>Word</th>
-                    <th>Correctness</th>
-                    <th>Guesses</th>
+                    <th>Understood</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,9 +44,8 @@ class Explanations extends React.Component {
                             <td>{exp.language}</td>
                             <td>{exp.Word[exp.language]}</td>
                             <td>
-                                {guesses === 0 ? <span>-</span> : <span>{(correct*100/guesses).toFixed(2)} %</span>}
+                                {correct}/{guesses} ({guesses === 0 ? <span>-</span> : <span>{(correct*100/guesses).toFixed(2)} %</span>})
                             </td>
-                            <td>{exp.Guesses.length}</td>
                         </tr>
                     )
                 })}
@@ -62,7 +60,7 @@ class Explanations extends React.Component {
 
         return (
             <div style={{width: '500px'}} className="explain-view">
-                <h2>Previous explanations</h2>
+                <h2>My explanations</h2>
 
                 {this.state.explanations.length === 0 ?
                     this.renderCallToAction() :

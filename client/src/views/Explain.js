@@ -109,9 +109,6 @@ class Explain extends React.Component {
                     <div className="word-to-explain">
                         {this.state.assignment.word[this.state.assignment.language]}
                     </div>
-                    <div className="header-for-word">
-                        in {this.state.assignment.language}
-                    </div>
                 </div>
                 <div className="time-remaining">
                     Time remaining: {this.state.time}

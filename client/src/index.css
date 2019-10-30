@@ -200,3 +200,12 @@ table tbody tr:nth-child(even) {
 table th, table td {
   padding: 5px;
 }
+
+.row {
+  display: flex;
+}
+
+.row .row-header {
+  font-weight: bold;
+  width: 400px;
+}
