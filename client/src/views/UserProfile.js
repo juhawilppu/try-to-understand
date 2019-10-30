@@ -44,6 +44,14 @@ class UserProfile extends React.Component {
         </div>
     )
 
+    percentage = (a, b) => {
+        if (b != 0) {
+            return (a*100/b).toFixed(2) + ' %';
+        } else {
+            return '-';
+        }
+    }
+
     render() {
 
         const options = [
@@ -62,14 +70,15 @@ class UserProfile extends React.Component {
             <div style={{ width: '500px' }} className="explain-view">
                 <h2>User profile</h2>
                 <div>
-                    <p>Total words explained: {this.state.explanations.length}</p>
                     <h3>Explain</h3>
-                    {this.row(`Understood`, results.explains_correct)}
-                    {this.row(`Total guesses`, results.explains_all)}
+                    {this.row(`Words explained by you`, this.state.explanations.length)}
+                    {this.row(`Understood by others`, this.percentage(results.explains_correct, results.explains_all))}
+                    {this.row(`Guesses from others`, results.explains_all)}
 
                     <h3>Guess</h3>
-                    {this.row(`Correct guesses from you`, results.guesses_correct)}
-                    {this.row(`Total guesses`, results.guesses_all)}
+                    {this.row(`Words guessed by you`, this.state.explanations.length)}
+                    {this.row(`Understood by you`, this.percentage(results.guesses_correct, results.guesses_all))}
+                    {this.row(`Guesses by you`, results.guesses_all)}
                 </div>
                 <Explanations explanations={this.state.explanations} />
                 {false &&
