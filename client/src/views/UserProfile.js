@@ -57,11 +57,13 @@ class UserProfile extends React.Component {
             <div style={{ width: '500px' }} className="explain-view">
                 <h2>User profile</h2>
                 <div>
-                    {this.row(`Correct guesses for explanations`, results.explains_correct)}
-                    {this.row(`Total guesses for explanations`, results.explains_all)}
+                    <h3>Explain</h3>
+                    {this.row(`Correct guesses received from others`, results.explains_correct)}
+                    {this.row(`Total guesses received from others`, results.explains_all)}
 
-                    {this.row(`Correct guesses for other's explanations`, results.guesses_correct)}
-                    {this.row(`Total guesses made for other's explanations`, results.guesses_all)}
+                    <h3>Guess</h3>
+                    {this.row(`Correct guesses by you`, results.guesses_correct)}
+                    {this.row(`Total guesses by you`, results.guesses_all)}
                 </div>
                 <Explanations />
                 <div style={{marginTop: 30}}>

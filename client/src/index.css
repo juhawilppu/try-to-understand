@@ -3,8 +3,9 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'PT Sans', sans-serif;
   font-size: 17px;
+  background: #F5F5F5;
 }
 
 .header {
@@ -144,6 +145,13 @@ textarea.text {
 
 .block-list {
   display: flex;
+}
+
+.block-list.top {
+  justify-content: center;
+}
+
+.block-list.bottom {
   justify-content: space-between;
 }
 
@@ -152,7 +160,7 @@ textarea.text {
 }
 
 .t-block {
-  background: #E0E0E0;
+  background: #81D4FA;
   width: 200px;
   height: 200px;
   text-align: center;
@@ -161,7 +169,7 @@ textarea.text {
 }
 
 .t-block:hover {
-  background: #BDBDBD;
+  background: #B3E5FC;
 }
 
 .t-block + .t-block {
@@ -206,6 +214,5 @@ table th, table td {
 }
 
 .row .row-header {
-  font-weight: bold;
   width: 400px;
 }

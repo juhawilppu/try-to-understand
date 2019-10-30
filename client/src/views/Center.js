@@ -14,27 +14,38 @@ class Dashboard extends React.Component {
             return { header, description, link }
         }
 
-        const options = [
+        const row1 = [
             option('Explain', 'Try to explain words', '/explain/TEXT_OPTIONS'),
             option('Guess', 'Guess what others tried to explain', '/guess'),
-            option('Results', 'See results for your explanations', '/explanations'),
+        ]
+        const row2 = [
             option('Profile', 'See your profile', '/user-profile'),
-            option('Leaderboards', 'See the champions', '/leaderboards'),
+            option('Leaderboards', 'See the champions', '/leaderboards')
+        ]
+        const row3 = [
             option('Admin', 'Modify words', '/admin')
         ]
 
         return (
             <React.Fragment>
-                <div className="block-list">
-                    {options.filter((k,i) => i < 3).map(option => (
+                <div className="block-list top">
+                    {row1.map(option => (
                         <div key={option.header} className="t-block" onClick={() => this.props.history.push(option.link)}>
                             <div className="block-header">{option.header}</div>
                             <div className="block-description">{option.description}</div>
                         </div>
                     ))}
                 </div>
-                <div className="block-list">
-                    {options.filter((k,i) => i >= 3).map(option => (
+                <div className="block-list top">
+                    {row2.map(option => (
+                        <div key={option.header} className="t-block" onClick={() => this.props.history.push(option.link)}>
+                            <div className="block-header">{option.header}</div>
+                            <div className="block-description">{option.description}</div>
+                        </div>
+                    ))}
+                </div>
+                <div className="block-list top">
+                    {row3.map(option => (
                         <div key={option.header} className="t-block" onClick={() => this.props.history.push(option.link)}>
                             <div className="block-header">{option.header}</div>
                             <div className="block-description">{option.description}</div>
