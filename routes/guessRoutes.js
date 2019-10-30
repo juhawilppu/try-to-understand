@@ -1,6 +1,5 @@
 const requireLogin = require('../middlewares/requireLogin');
 const Sequlize = require('sequelize');
-const Op = Sequlize.Op;
 
 module.exports = (app, sequelize) => {
 
@@ -14,6 +13,7 @@ module.exports = (app, sequelize) => {
         async (req, res) => {
             const explanations = await sequelize.query(`
                 select * from Assignments where user_id != ${req.user.id}
+                and downvotes < 2
                 and id not in (select assignment_id from guesses where user_id=${req.user.id})
                 order by random() limit 1
             `,
@@ -34,15 +34,9 @@ module.exports = (app, sequelize) => {
         '/api/guess',
         requireLogin,
         async (req, res) => {
-
-            console.log(req.body);
             
             const assignment = await sequelize.models.Assignment.findByPk(req.body.assignment_id);
             const word = await sequelize.models.Word.findByPk(assignment.word_id);
-
-            console.log('received guess ' + req.body.guess);
-            console.log('word in english' + word.english);
-            console.log('guess language' + assignment.language);
 
             const guess = await sequelize.models.Guess.build({
                 assignment_id: assignment.id,

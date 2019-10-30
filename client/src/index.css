@@ -216,3 +216,17 @@ table th, table td {
 .row .row-header {
   width: 400px;
 }
+
+.landing-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.landing-page .tagline {
+  font-style: italic;
+}
+
+.landing-page button {
+  margin-top: 100px;
+}
