@@ -19,7 +19,8 @@ class Header extends React.Component {
             default:
                 return (
                     <React.Fragment>
-                        <span style={{marginRight: '20px'}} onClick={this.gotoProfile}>{this.props.auth.username}</span>
+                        <TotalScore score={this.props.auth.totalScore} />
+                        <span className="header-username" onClick={this.gotoProfile}>{this.props.auth.username}</span>
                         <TButton href="/api/logout">Logout</TButton>
                     </React.Fragment>
                 )
@@ -54,3 +55,20 @@ const mapStateToProps = (val) => {
 }
 
 export default withRouter(connect(mapStateToProps)(Header));
+
+class TotalScore extends React.Component {
+    state = {
+        score: null
+    }
+
+    static getDerivedStateFromProps = props => {
+        console.log('props ', props)
+        return { score: props.score }
+    }
+
+    render() {
+        return (
+            <span className="header-total-score">{this.state.score}</span>
+        )
+    }
+}

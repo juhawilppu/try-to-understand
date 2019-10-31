@@ -20,7 +20,7 @@ module.exports = (app, sequelize) => {
         res.redirect('/')
     });
 
-    app.get('/api/current_user', (req, res) => {
+    app.get('/api/current_user', async (req, res) => {
         res.send(req.user);
     });
 
@@ -28,8 +28,6 @@ module.exports = (app, sequelize) => {
         const user = await sequelize.models.User.findByPk(req.user.id);
         user.language = req.body.language;
         user.username = req.body.username;
-        console.log(user)
-        console.log('saving.....................')
         user.save();
         res.send(user);
     });

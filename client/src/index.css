@@ -235,3 +235,14 @@ table th, table td {
 .margin-top-m {
   margin-top: 50px;
 }
+
+.header-total-score {
+  background: #FF6D00;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.header-username {
+  margin-right: 20px;
+}

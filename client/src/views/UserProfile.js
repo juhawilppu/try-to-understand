@@ -66,9 +66,16 @@ class UserProfile extends React.Component {
             return <div>Loading...</div>
         }
 
+        const explainScore = results.explains_correct - (results.explains_all - results.explains_correct);
+        const guessScore = results.guesses_correct - (results.guesses_all - results.guesses_correct);
+        const totalScore = explainScore + guessScore;
+
         return (
             <div style={{ width: '500px' }} className="explain-view">
                 <h2>User profile</h2>
+
+                <div>Total score: {totalScore}</div>
+
                 <div>
                     <h3>Explain</h3>
                     {this.row(`Words explained by you`, this.state.explanations.length)}

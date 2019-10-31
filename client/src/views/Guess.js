@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from 'actions';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import TButton from 'components/TButton';
@@ -29,6 +31,7 @@ class Guess extends React.Component {
             guess: this.state.guess
         }
         const response = await axios.post('/api/guess', dto);
+        this.props.fetchUser();
 
         this.setState({ answered: true, correct: response.data.correct, correctAnswer: response.data.correctAnswer });
     }
@@ -188,4 +191,8 @@ class Guess extends React.Component {
     }
 }
 
-export default withRouter(Guess);
+const mapStateToProps = (val) => {
+    return { auth: val.auth };
+  }
+
+export default connect(mapStateToProps, actions)(withRouter(Guess));

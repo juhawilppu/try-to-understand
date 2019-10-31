@@ -1,10 +1,9 @@
 const requireLogin = require('../middlewares/requireLogin');
 const Sequlize = require('sequelize');
-const Op = Sequlize.Op;
 
 module.exports = (app, sequelize) => {
 
-    const getList = async (username) => {
+    app.getList = async (username) => {
         const usernameFilter = username ? `where u.username='${username}'` : ``;
         const list = await sequelize.query(`
             WITH
@@ -48,7 +47,7 @@ module.exports = (app, sequelize) => {
         '/api/leaderboards/me',
         requireLogin,
         async (req, res) => {
-            const list = await getList(req.user.username);
+            const list = await app.getList(req.user.username);
             res.send(list[0]);
     });
 
@@ -56,7 +55,7 @@ module.exports = (app, sequelize) => {
         '/api/leaderboards',
         requireLogin,
         async (req, res) => {
-            const list = await getList();
+            const list = await app.getList();
             res.send(list);
         }
     );

@@ -53,10 +53,6 @@ class Explain extends React.Component {
 
     }
 
-    cancelMessage = () => {
-        this.props.history.push(`/center`);
-    }
-
     change = (word) => {
         const wantedWord = this.state.assignment.word[this.state.assignment.language];
 
@@ -131,8 +127,8 @@ class Explain extends React.Component {
                             <TButton onClick={this.sendAnswer}>
                                 Send
                             </TButton>
-                            <TButton flat onClick={this.cancelMessage}>
-                                Quit
+                            <TButton flat onClick={this.next}>
+                                Skip
                             </TButton>
                         </span>
                     </div>

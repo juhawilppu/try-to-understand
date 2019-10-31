@@ -14,7 +14,13 @@ module.exports = (app, sequelize) => {
                 id
             }
         });
-        done(null, user);
+        const list = await app.getList(user.username);
+        done(null, {
+            id: user.id,
+            username: user.username,
+            language: user.language,
+            totalScore: list[0].total_score
+        });
     });
 
     passport.use(
