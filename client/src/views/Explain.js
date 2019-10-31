@@ -6,6 +6,8 @@ import * as actions from '../actions';
 import TButton from 'components/TButton';
 import TTextfield from 'components/TTextfield';
 
+const MAX_TIME = 120;
+
 class Explain extends React.Component {
     state = {
         loaded: false,
@@ -13,7 +15,7 @@ class Explain extends React.Component {
         assignment: null,
         content: '',
         allowed: true,
-        time: 60
+        time: MAX_TIME
     }
 
     componentDidMount = () => {
@@ -23,7 +25,7 @@ class Explain extends React.Component {
     next = async () => {
         try {
             const response = await axios.get(`/api/assignments/${this.props.auth.language}`);
-            this.setState({ loaded: true, assignment: response.data, content: '', time: 60 }, this.startTimer);
+            this.setState({ loaded: true, assignment: response.data, content: '', time: MAX_TIME }, this.startTimer);
         } catch (error) {
             this.setState({ error })
         }
@@ -96,7 +98,7 @@ class Explain extends React.Component {
         }
 
         return (
-            <div style={{ width: '500px' }} className="explain-view">
+            <div className="explain-view page">
                 <h2>Explain</h2>
                 <div>
                     <div className="header-for-word">
@@ -124,11 +126,11 @@ class Explain extends React.Component {
                             }
                         </div>
                         <span>
-                            <TButton onClick={this.sendAnswer}>
-                                Send
-                            </TButton>
                             <TButton flat onClick={this.next}>
                                 Skip
+                            </TButton>
+                            <TButton onClick={this.sendAnswer}>
+                                Send
                             </TButton>
                         </span>
                     </div>

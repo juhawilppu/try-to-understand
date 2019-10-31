@@ -152,7 +152,7 @@ class Guess extends React.Component {
 
         if (this.state.error) {
             return (
-                <div style={{width: '500px'}} className="explain-view">
+                <div className="explain-view page">
                     <h2>Guess</h2>
                     <div className="common-info-box">
                         <p>No explanations found. You need to wait a bit for other users to write them.</p>
@@ -165,14 +165,14 @@ class Guess extends React.Component {
 
         if (!this.state.loaded) {
             return (
-                <div style={{width: '500px'}} className="explain-view">
+                <div className="explain-view page">
                     <h2>Guess</h2>
                 </div>
             )
         }
 
         return (
-            <div style={{width: '500px'}} className="guess-view">
+            <div className="guess-view page">
                 <h2>Guess</h2>
                 <div>
                     <div className="header-for-word">

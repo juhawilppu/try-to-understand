@@ -89,7 +89,11 @@ table th {
 
 .options-list button {
   width: 100%;
-  margin: 5px;
+  margin-bottom: 5px;
+}
+
+.options-list button + button {
+  margin-left: 5px;
 }
 
 
@@ -238,6 +242,7 @@ table th, table td {
 
 .header-total-score {
   background: #FF6D00;
+  color: white;
   padding: 5px;
   border-radius: 5px;
   margin-right: 10px;
@@ -245,4 +250,35 @@ table th, table td {
 
 .header-username {
   margin-right: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    padding: 0;
+  }
+
+  .header .product-name {
+    font-size: 10px;
+  }
+
+  .t-block {
+    width: 100%;
+  }
+
+  .page {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .row .row-header {
+    width: 50%;
+  }
+
+  .row .row-value {
+    width: 50%;
+  }
+
+  h2 {
+    text-align: left;
+  }
 }

@@ -33,7 +33,7 @@ module.exports = (app, sequelize) => {
             explains.all as explains_all,
             guesses.correct as guesses_correct,
             guesses.all as guesses_all,
-            explains.correct+guesses.correct as total_score
+            explains.correct-(explains.all-explains.correct)+guesses.correct-(guesses.all-guesses.correct) as total_score
             from users u
             left join explains on (u.username = explains.username)
             left join guesses on (u.username = guesses.username)

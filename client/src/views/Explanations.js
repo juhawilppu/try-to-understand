@@ -19,7 +19,6 @@ class Explanations extends React.Component {
         <table>
             <thead>
                 <tr>
-                    <th>Language</th>
                     <th>Word</th>
                     <th>Understood</th>
                 </tr>
@@ -30,7 +29,6 @@ class Explanations extends React.Component {
                     const correct = exp.Guesses.filter(g => g.correct).length;
                     return (
                         <tr key={exp.id}>
-                            <td>{exp.language}</td>
                             <td>{exp.Word[exp.language]}</td>
                             <td>
                                 {correct}/{guesses} ({guesses === 0 ? <span>-</span> : <span>{(correct*100/guesses).toFixed(2)} %</span>})
@@ -44,7 +42,7 @@ class Explanations extends React.Component {
 
     render() {
         return (
-            <div style={{width: '500px'}} className="explain-view">
+            <div className="explain-view">
                 <h2>My explanations</h2>
 
                 {this.props.explanations.length === 0 ?

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Logo from '../common/Logo';
 import TButton from 'components/TButton';
+import TotalScore from 'views/TotalScore';
 
 class Header extends React.Component {
 
@@ -55,20 +56,3 @@ const mapStateToProps = (val) => {
 }
 
 export default withRouter(connect(mapStateToProps)(Header));
-
-class TotalScore extends React.Component {
-    state = {
-        score: null
-    }
-
-    static getDerivedStateFromProps = props => {
-        console.log('props ', props)
-        return { score: props.score }
-    }
-
-    render() {
-        return (
-            <span className="header-total-score">{this.state.score}</span>
-        )
-    }
-}
