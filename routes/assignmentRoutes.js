@@ -15,14 +15,20 @@ module.exports = (app, sequelize) => {
     /**
      * Get a random list of Words which also contains the given word.
      */
-    const getRandomOptions = (wordId) => {
+    const getRandomOptions = (wordId, language) => {
         return sequelize
         .query(`
-            (SELECT * FROM Words WHERE id != ${wordId} ORDER BY random() LIMIT 8)
-            UNION
-            (SELECT * FROM Words WHERE id = ${wordId})
+            (select * from words where language = :language and id != :word_id order by random() limit 8)
+            union
+            (select * from words where id = :word_id)
             `,
-        { model: sequelize.models.Word });
+        {
+            replacements: {
+                language,
+                word_id: wordId
+            },
+            model: sequelize.models.Word 
+        });
     }
 
     app.get(
@@ -44,8 +50,11 @@ module.exports = (app, sequelize) => {
         requireLogin,
         async (req, res) => {
             const words = await sequelize.query(`
-            SELECT * FROM Words ORDER BY random() LIMIT 1
-            `, { model: sequelize.models.Word });
+            select * from words where language = :language order by random() limit 1
+            `, {
+                replacements: { language: req.params.language },
+                model: sequelize.models.Word
+            });
 
             const assignment = {
                 word: words[0],
@@ -63,12 +72,12 @@ module.exports = (app, sequelize) => {
 
             const options = req.params.assignmentType === 'TEXT_FREETEXT' ?
                 null :
-                shuffleArray(await getRandomOptions(req.body.word_id));
+                shuffleArray(await getRandomOptions(req.body.word_id, req.body.language));
 
             const message = await sequelize.models.Assignment.build({
                 answer: req.body.answer,
                 word_id: req.body.word_id,
-                options: options ? options.map(o => o[req.body.language]).join(',') : null,
+                options: options ? options.map(o => o.word).join(',') : null,
                 language: req.body.language,
                 type: req.params.assignmentType,
                 downvotes: 0,

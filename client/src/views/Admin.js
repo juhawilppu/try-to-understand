@@ -36,14 +36,16 @@ class Admin extends React.Component {
                 <table>
                     <thead>
                         <tr>
-                            <th>English</th>
+                            <th>Language</th>
+                            <th>Word</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.loaded && this.state.words.map(exp => 
                             <tr key={exp.id}>
-                                <td>{exp.english}</td>
+                                <td>{exp.language}</td>
+                                <td>{exp.word}</td>
                                 <td><TButton flat onClick={() => this.delete(exp._id)}>Delete</TButton></td>
                             </tr>
                         )}

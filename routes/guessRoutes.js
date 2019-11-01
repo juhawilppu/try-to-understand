@@ -12,12 +12,17 @@ module.exports = (app, sequelize) => {
         requireLogin,
         async (req, res) => {
             const explanations = await sequelize.query(`
-                select * from assignments where user_id != ${req.user.id}
+                select * from assignments where user_id != :user_id
                 and downvotes < 2
-                and id not in (select assignment_id from guesses where user_id=${req.user.id})
+                and id not in (select assignment_id from guesses where user_id = :user_id)
                 order by random() limit 1
             `,
-            { model: sequelize.models.Assignment });
+            {
+                replacements: {
+                    user_id: req.user.id
+                },
+                model: sequelize.models.Assignment
+            });
             const explanation = explanations[0];
 
             if (explanation) {
@@ -41,12 +46,12 @@ module.exports = (app, sequelize) => {
             const guess = await sequelize.models.Guess.build({
                 assignment_id: assignment.id,
                 guess: req.body.guess,
-                correct: word[assignment.language] === req.body.guess,
+                correct: word.word === req.body.guess,
                 user_id: req.user.id
             }).save();
             res.send({
                 correct: guess.correct,
-                correctAnswer: word[assignment.language]
+                correctAnswer: word.word
             });
         }
     );

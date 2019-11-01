@@ -8,7 +8,15 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        english: {
+        language: {
+            type: Sequelize.STRING(16),
+            allowNull: false
+        },
+        word: {
+            type: Sequelize.STRING(256),
+            allowNull: false
+        },
+        description: {
             type: Sequelize.STRING(256),
             allowNull: false
         },
