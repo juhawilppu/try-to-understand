@@ -45,7 +45,7 @@ class Guess extends React.Component {
             <div className="common-info-box">
                 Your answer is {this.state.correct ?
                 <span className="common-correct">Correct</span> :
-                <span>Wrong. It tried to describe a {this.state.correctAnswer}.</span> }
+                <span>Wrong. It tried to describe <span className="guess-correct-word">{this.state.correctAnswer}</span>.</span> }
             </div>
             <div className="margin-top-m">
                 <TButton onClick={this.next}>Next</TButton>
@@ -176,13 +176,13 @@ class Guess extends React.Component {
                 <h2>Guess</h2>
                 <div>
                     <div className="header-for-word">
-                        Guess what this means:
+                        Guess what this means
                     </div>
-                    <div className="word">
+                    <div className="word-to-explain">
                         {this.state.assignment.explanation.answer}
                     </div>
                     <div className="footer-for-word">
-                        as explained by {this.state.assignment.user.username}
+                        Explained by: {this.state.assignment.user.username}
                     </div>
                 </div>
                 {this.state.answered ? this.renderResult() : this.renderGuess() }

@@ -8,6 +8,11 @@ body {
   background: #F5F5F5;
 }
 
+.page {
+  width: 100%;
+  max-width: 600px;
+}
+
 .header {
   background: #607D8B;
   color: white;
@@ -48,10 +53,18 @@ body {
   background: #B3E5FC;
 }
 
-.guess-view .word {
-  font-size: 30px;
+.guess-view .correct-word {
+  background: #B3E5FC;
+  padding: 10px;
+}
+
+.guess-view .word-to-explain {
+  font-size: 27px;
   margin-top: 10px;
   margin-bottom: 10px;
+  text-align: center;
+  padding: 10px;
+  background: #B3E5FC;
 }
 
 .center-page {
@@ -128,6 +141,7 @@ button.flat {
   outline: none;
   background: transparent;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 button.flat:hover {
@@ -137,6 +151,10 @@ button.flat:hover {
 
 button.flat:active {
   background: #81C784;
+  color: white;
+}
+
+button.white {
   color: white;
 }
 

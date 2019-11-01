@@ -24,6 +24,9 @@ class Explain extends React.Component {
 
     next = async () => {
         try {
+            if (this.state.timer) {
+                clearInterval(this.state.timer);
+            }
             const response = await axios.get(`/api/assignments/${this.props.auth.language}`);
             this.setState({ loaded: true, assignment: response.data, content: '', time: MAX_TIME }, this.startTimer);
         } catch (error) {
@@ -105,7 +108,7 @@ class Explain extends React.Component {
                         Try to explain...
                     </div>
                     <div className="word-to-explain">
-                        {this.state.assignment.word[this.state.assignment.language]}
+                        {this.state.assignment.word.word}
                     </div>
                 </div>
                 <div style={{ marginTop: '50px' }}>

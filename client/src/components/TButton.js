@@ -10,6 +10,8 @@ const TButton = props => {
         type = 'secondary';
     }
 
+    const classes = [type, props.color]
+
     const click = () => {
         if (props.onClick) {
             props.onClick();
@@ -19,7 +21,7 @@ const TButton = props => {
     }
 
     return (
-        <button className={type} onClick={click} >
+        <button className={classes.join(' ')} onClick={click} >
             {props.children}
         </button>
     )

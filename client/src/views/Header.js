@@ -22,7 +22,7 @@ class Header extends React.Component {
                     <React.Fragment>
                         <TotalScore score={this.props.auth.totalScore} />
                         <span className="header-username" onClick={this.gotoProfile}>{this.props.auth.username}</span>
-                        <TButton href="/api/logout">Logout</TButton>
+                        <TButton flat color="white" href="/api/logout">Logout</TButton>
                     </React.Fragment>
                 )
         }
