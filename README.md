@@ -4,11 +4,16 @@ Language learning platform where you explain words (in written) and try to guess
 
 ## How to run locally
 
-Create a file into config/dev.js with the secrets (Google OAuth 2.0 configuration etc.).
+Create a file `config/dev.js` with the secrets (Google OAuth 2.0 configuration etc.). See example of format from `config/prod.js`.
 
 Start local PostgreSQL
 ```
 docker-compose up -d
+```
+
+Migrate database
+```
+./migrate-dev-db.sh
 ```
 
 Start frontend and backend

@@ -19,7 +19,7 @@ const sequelize = new Sequelize(keys.postgres.database, keys.postgres.username, 
         paranoid: true,
         underscored: true
     },
-    force: true // This will DROP tables and rebuild schema
+    force: false // If true, will drop all tables and rebuild schema
 });
 
 app.use(
