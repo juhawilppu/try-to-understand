@@ -6,6 +6,5 @@ cd client
 npm run build
 cd ..
 
-gcloud app deploy --verbosity=debug
-heroku run sequelize db:migrate --env production --app trytounderstand
-#heroku run sequelize db:seed:all --env production --app trytounderstand
+gcloud app deploy --verbosity=debug -v 1
+sequelize db:migrate --env production
