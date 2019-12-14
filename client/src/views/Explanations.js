@@ -29,7 +29,7 @@ class Explanations extends React.Component {
                     const correct = exp.Guesses.filter(g => g.correct).length;
                     return (
                         <tr key={exp.id}>
-                            <td>{exp.Word[exp.language]}</td>
+                            <td>{exp.Word.word}</td>
                             <td>
                                 {correct}/{guesses} ({guesses === 0 ? <span>-</span> : <span>{(correct*100/guesses).toFixed(2)} %</span>})
                             </td>
