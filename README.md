@@ -1,8 +1,28 @@
-# node-google-oauth
+# TryToUnderstand
 
-Test project for NodeJS using Google OAuth 2.0, MongoDB and React. Check it out: https://limitless-ocean-63000.herokuapp.com/ .
+Language learning platform where you explain words (in written) and try to guess what other have explained. Gain points by successful guesses.
 
-## How to configure Google OAuth
+## How to run locally
+
+Create a file into config/dev.js with the secrets (Google OAuth 2.0 configuration etc.).
+
+Start local PostgreSQL
+```
+docker-compose up -d
+```
+
+Start frontend and backend
+```
+cd client
+npm install
+cd ..
+npm install
+npm run dev
+```
+
+The app should now be running on [localhost:5000](http://localhost:5000/).
+
+## How to configure Google OAuth 2.0
 Got to [https://console.developers.google.com](https://console.developers.google.com) .
 
 1. Create a new project by clicking the top bar, then click "NEW PROJECT". It takes about 1 minute until it's created.
@@ -25,13 +45,14 @@ Click "Create credentials" -> OAuth client id.
 
 A popup should open with the keys.
 
-7. Create a file `./config/keys.js` like below and insert the keys there.
+7. Create a file `./config/dev.js` like below and insert the keys there.
 ```
 module.exports = {
     google: {
         clientId: "${Insert here the Client ID}",
         clientSecret: "${Insert here the Client secret}"
-    }
+    },
+    ...
 }
 ```
 
@@ -51,26 +72,8 @@ heroku create
 
 Heroku is now configured.
 
-## Running locally
-
-Start local PostgreSQL
-```
-docker-compose up -d
-```
-
-Start development
-```
-npm install
-cd client
-npm install
-cd ..
-npm run dev
-```
-
-The app should now be running on [localhost:5000](http://localhost:5000/).
-
-## How to deploy
-Remember to [create a Heroku project](#how-to-create-a-heroku-project) first.
+## How to deploy to Heroku
+Complete steps mentioned in [create a Heroku project](#how-to-create-a-heroku-project) first.
 
 Deploy to Heroku by pushing your latest commit to Heroku
 ```
@@ -79,9 +82,16 @@ git push heroku master
 
 Go to https://limitless-ocean-63000.herokuapp.com/ or whatever is your Heroku application URL.
 
+## How to deploy to Google App Engine
+Ensure that `gcloud` is configured to the correct Google project.
+
+Then run
+```
+./deploy-to-google.sh
+```
+
 ## Built with
 * [NodeJS](https://nodejs.org/en/) with [express](https://expressjs.com/)
 * [React](https://reactjs.org/), [Redux](https://redux.js.org/) and [TypeScript](https://www.typescriptlang.org/).
-* [Heroku](https://www.heroku.com).
 * [Google OAuth](https://developers.google.com/identity/protocols/OAuth2).
 * [PostgreSQL](https://www.postgresql.org/)
