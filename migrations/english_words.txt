@@ -1150,7 +1150,6 @@ garlic
 gas
 gate
 gather
-gay
 gaze
 gear
 gender
@@ -2369,8 +2368,6 @@ settlement
 seven
 several
 severe
-sex
-sexual
 shade
 shadow
 shake
@@ -2589,7 +2586,6 @@ sufficient
 sugar
 suggest
 suggestion
-suicide
 suit
 summer
 summit
