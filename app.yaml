@@ -1,0 +1,31 @@
+# Script for deploying the app to Google App Engine
+
+runtime: nodejs10
+manual_scaling:
+  instances: 1
+
+resources:
+  cpu: .5
+  memory_gb: 0.5
+  disk_size_gb: 10
+
+#handlers:
+#  - url: /api/.*
+#    script: auto
+#  - url: /
+#    static_files: client/build/index.html
+#    upload: client/build/index.html
+#  - url: /
+#    static_dir: client/build
+
+# [START gae_postgres_env]
+# The following env variables may contain sensitive information that grants
+# anyone access to your database. Do not add this file to your source control.
+env_variables:
+  COOKIE_KEY: xxx
+  DB_DATABASE: xxx
+  DB_HOST: xxx
+  DB_PASSWORD: xxx
+  DB_USERNAME: xxx
+  GOOGLE_CLIENT_ID: xxx
+  GOOGLE_CLIENT_SECRET: xxx
