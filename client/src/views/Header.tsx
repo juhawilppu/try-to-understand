@@ -28,8 +28,8 @@ class Header extends React.Component<any> {
         }
     }
 
-    gotoCenter = () => {
-        this.props.history.push(`/center`);
+    gotoMenu = () => {
+        this.props.history.push(`/menu`);
     }
 
     gotoProfile = () => {
@@ -40,7 +40,7 @@ class Header extends React.Component<any> {
 
         return (
             <div className="header">
-                <span className="product-name" onClick={this.gotoCenter}>
+                <span className="product-name" onClick={this.gotoMenu}>
                     <Logo wrap />
                 </span>
                 <span className="profile">

@@ -38,7 +38,7 @@ class Guess extends React.Component<any, any> {
     }
 
     cancelMessage = () => {
-        this.props.history.push(`/center`);
+        this.props.history.push(`/menuxs`);
     }
 
     renderResult = () => (

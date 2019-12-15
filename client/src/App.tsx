@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Header from 'views/Header';
 import Landing from 'views/Landing';
 import Explain from 'views/Explain';
-import Center from 'views/Center';
+import MainMenu from 'views/MainMenu';
 import Explanations from 'views/Explanations';
 import Admin from 'views/Admin';
 import AdminAddWord from 'views/AdminAddWord';
@@ -50,8 +50,8 @@ class App extends Component<Props> {
           if (this.props.auth.username) {
             routes = (
               <React.Fragment>
-                <Route path="/" exact component={Center} />
-                <Route path="/center" exact component={Center} />
+                <Route path="/" exact component={MainMenu} />
+                <Route path="/menu" exact component={MainMenu} />
                 <Route path="/explain/:assignmentType" exact component={Explain} />
                 <Route path="/guess" exact component={Guess} />
                 <Route path="/explanations" exact component={Explanations} />

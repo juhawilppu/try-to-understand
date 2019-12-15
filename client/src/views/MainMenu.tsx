@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-class Dashboard extends React.Component<any, any> {
+class MainMenu extends React.Component<any, any> {
     state = {
         loaded: true
     }
@@ -67,7 +67,7 @@ class Dashboard extends React.Component<any, any> {
 
         return (
             <div className="page center-page page">
-                <h2>Explain Center</h2>
+                <h2>Main Menu</h2>
                 {content}
             </div>
         )
@@ -78,4 +78,4 @@ const mapStateToProps = (val : any) => {
     return { auth: val.auth };
 }
 
-export default connect(mapStateToProps)(withRouter(Dashboard));
+export default connect(mapStateToProps)(withRouter(MainMenu));
