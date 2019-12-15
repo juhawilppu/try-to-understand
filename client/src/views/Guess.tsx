@@ -6,7 +6,7 @@ import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import TButton from 'components/TButton';
 
-class Guess extends React.Component {
+class Guess extends React.Component<any, any> {
     state = {
         loaded: false,
         assignment: null,
@@ -21,13 +21,14 @@ class Guess extends React.Component {
         this.next();
     }
 
-    sendGuess = (option) => {
+    sendGuess = (option : any) => {
         this.setState({ guess: option }, this.sendMessage);
     }
 
     sendMessage = async () => {
+        const assignment = this.state.assignment as any;
         const dto = {
-            assignment_id: this.state.assignment.explanation.id,
+            assignment_id: assignment.explanation.id,
             guess: this.state.guess
         }
         const response = await axios.post('/api/guess', dto);
@@ -53,8 +54,8 @@ class Guess extends React.Component {
         </div>
     )
 
-    report = () => {
-        axios.post('/api/guess/report/' + this.state.assignment.explanation.id);
+    report = (assignment : any) => {
+        axios.post('/api/guess/report/' + assignment.explanation.id);
         this.next();
     }
 
@@ -67,9 +68,9 @@ class Guess extends React.Component {
         }
     }
 
-    renderInputUi = () => {
-        if (this.state.assignment.explanation.options) {
-            return this.renderOptionsInput();
+    renderInputUi = (assignment : any) => {
+        if (assignment.explanation.options) {
+            return this.renderOptionsInput(assignment);
         } else {
             return this.renderTextInput();
         }
@@ -90,7 +91,7 @@ class Guess extends React.Component {
                 autoFocus
                 fullWidth
             />
-            <div style={{marginTop: '20px', display: 'flex', justifyguess: 'flex-end'}}>
+            <div style={{marginTop: '20px', display: 'flex', justifyContent: 'flex-end'}}>
                 <TButton flat onClick={this.report}>
                     Report
                 </TButton>
@@ -104,24 +105,24 @@ class Guess extends React.Component {
         </React.Fragment>
     )
 
-    getOptions = (index) => {
-        return this.state.assignment.explanation.options.split(',').slice(index*3, index*3+3);
+    getOptions = (index : number, assignment : any) => {
+        return assignment.explanation.options.split(',').slice(index*3, index*3+3);
     }
 
-    renderOptionsInput = () => (
+    renderOptionsInput = (assignment : any) => (
         <React.Fragment>
             <div className="options-list">
-                {this.getOptions(0).map(option => (
+                {this.getOptions(0, assignment).map((option : any) => (
                     <TButton key={option} onClick={() => this.sendGuess(option)}>{option}</TButton>
                 ))}
             </div>
             <div className="options-list">
-                {this.getOptions(1).map(option => (
+                {this.getOptions(1, assignment).map((option : any) => (
                     <TButton key={option} onClick={() => this.sendGuess(option)}>{option}</TButton>
                 ))}
             </div>
             <div className="options-list">
-                {this.getOptions(2).map(option => (
+                {this.getOptions(2, assignment).map((option : any) => (
                     <TButton key={option} onClick={() => this.sendGuess(option)}>{option}</TButton>
                 ))}
             </div>
@@ -137,9 +138,9 @@ class Guess extends React.Component {
     )
 
 
-    renderGuess = () => (
+    renderGuess = (assignment : any) => (
         <div style={{marginTop: '50px'}}>
-            {this.renderInputUi()}
+            {this.renderInputUi(assignment)}
         </div>
     )
 
@@ -171,6 +172,8 @@ class Guess extends React.Component {
             )
         }
 
+        const assignment = this.state.assignment as any;
+
         return (
             <div className="guess-view page">
                 <h2>Guess</h2>
@@ -179,19 +182,19 @@ class Guess extends React.Component {
                         Guess what this means
                     </div>
                     <div className="word-to-explain">
-                        {this.state.assignment.explanation.answer}
+                        {assignment.explanation.answer}
                     </div>
                     <div className="footer-for-word">
-                        Explained by: {this.state.assignment.user.username}
+                        Explained by: {assignment.user.username}
                     </div>
                 </div>
-                {this.state.answered ? this.renderResult() : this.renderGuess() }
+                {this.state.answered ? this.renderResult() : this.renderGuess(assignment) }
             </div>
         )
     }
 }
 
-const mapStateToProps = (val) => {
+const mapStateToProps = (val : any) => {
     return { auth: val.auth };
   }
 

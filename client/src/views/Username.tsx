@@ -5,12 +5,16 @@ import { withRouter } from 'react-router-dom';
 import TButton from 'components/TButton';
 import TTextfield from 'components/TTextfield';
 
-class Username extends React.Component {
+interface Props {
+    saveUser: any;
+    auth: any;
+}
+class Username extends React.Component<Props> {
     state = {
         username: ''
     }
 
-    change = value => {
+    change = (value : string) => {
         this.setState({ username: value });
     }
 
@@ -26,7 +30,8 @@ class Username extends React.Component {
                 <TTextfield
                     rows={1}
                     value={this.state.username}
-                    onChange={event => this.change(event.target.value)}
+                    onChange={(event : any) => this.change(event.target.value)}
+                    maxLength={100}
                     autoFocus
                 />
                 <div style={{marginTop: 30}}>
@@ -37,7 +42,7 @@ class Username extends React.Component {
     }
 }
 
-const mapStateToProps = (val) => {
+const mapStateToProps = (val : any) => {
     return { auth: val.auth };
 }
 

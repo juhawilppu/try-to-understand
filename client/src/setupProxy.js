@@ -1,3 +1,7 @@
+// src/setupProxy.js
+//
+// @ts-ignore: isolated modules error
+
 /**
  * Proxy rules to be used in development environment.
  */

@@ -1,6 +1,15 @@
 import React from 'react';
 
-const TTextfield = props => {
+interface TTextfieldProps {
+    value: any;
+    rows: number;
+    onClick?: any;
+    onKeyDown?: any;
+    onChange: any;
+    autoFocus: boolean;
+    maxLength: number;
+}
+const TTextfield = (props : TTextfieldProps) => {
 
     return (
         <textarea

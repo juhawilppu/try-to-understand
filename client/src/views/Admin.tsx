@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import TButton from 'components/TButton';
 
-class Admin extends React.Component {
+class Admin extends React.Component<any> {
     state = {
         loaded: false,
         words: []
@@ -23,7 +23,7 @@ class Admin extends React.Component {
         this.props.history.push(`/admin/add-word`);
     }
 
-    delete = (id) => {
+    delete = (id : number) => {
         axios.delete(`/api/admin/words/${id}`).then(response => {
             this.load();
         });
@@ -42,7 +42,7 @@ class Admin extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.loaded && this.state.words.map(exp => 
+                        {this.state.loaded && this.state.words.map((exp : any) =>
                             <tr key={exp.id}>
                                 <td>{exp.language}</td>
                                 <td>{exp.word}</td>

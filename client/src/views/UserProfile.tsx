@@ -8,9 +8,9 @@ import axios from 'axios';
 import Explanations from './Explanations';
 import TotalScore from 'views/TotalScore';
 
-class UserProfile extends React.Component {
+class UserProfile extends React.Component<any, any> {
     state = {
-        loaded: null,
+        loaded: false,
         results: null,
         learning: null,
         explanations: null
@@ -30,7 +30,7 @@ class UserProfile extends React.Component {
         }).catch(error => alert(error));
     }
 
-    handleChange = selectedOption => {
+    handleChange = (selectedOption : any) => {
         this.setState({ learning: selectedOption.value })
     }
 
@@ -38,14 +38,14 @@ class UserProfile extends React.Component {
         this.props.saveUser({ username: this.props.auth.username, language: this.state.learning });
     }
 
-    row = (header, value) => (
+    row = (header : string, value : string) => (
         <div className="row">
             <div className="row-header">{header}</div>
             <div className="value">{value}</div>
         </div>
     )
 
-    percentage = (a, b) => {
+    percentage = (a : number, b : number) => {
         if (b != 0) {
             return (a*100/b).toFixed(2) + ' %';
         } else {
@@ -61,26 +61,28 @@ class UserProfile extends React.Component {
 
         const selectedOption = options.find(o => o.value === this.state.learning);
 
-        const { results } = this.state;
-
         if (!this.state.loaded) {
             return <div>Loading...</div>
         }
+
+        const results = this.state.results as any;
+        const explanations = this.state.explanations as any;
+        const score = this.props.auth.totalScore as number;
 
         return (
             <div className="explain-view page">
                 <h2>User profile</h2>
 
-                <div>Total score: <TotalScore score={this.props.auth.totalScore} /></div>
+                <div>Total score: <TotalScore score={score} /></div>
 
                 <div>
                     <h3>Explain</h3>
-                    {this.row(`Words explained by you`, this.state.explanations.length)}
+                    {this.row(`Words explained by you`, explanations.length)}
                     {this.row(`Understood by others`, this.percentage(results.explains_correct, results.explains_all))}
                     {this.row(`Guesses from others`, results.explains_all)}
 
                     <h3>Guess</h3>
-                    {this.row(`Words guessed by you`, this.state.explanations.length)}
+                    {this.row(`Words guessed by you`, explanations.length)}
                     {this.row(`Understood by you`, this.percentage(results.guesses_correct, results.guesses_all))}
                     {this.row(`Guesses by you`, results.guesses_all)}
                 </div>
@@ -102,7 +104,7 @@ class UserProfile extends React.Component {
     }
 }
 
-const mapStateToProps = (val) => {
+const mapStateToProps = (val : any) => {
     return { auth: val.auth };
 }
 

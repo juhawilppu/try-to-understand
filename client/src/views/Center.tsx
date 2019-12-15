@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-class Dashboard extends React.Component {
+class Dashboard extends React.Component<any, any> {
     state = {
         loaded: true
     }
 
     renderUi = () => {
 
-        const option = (header, description, link) => {
+        const option = (header : string, description : string, link : string) => {
             return { header, description, link }
         }
 
@@ -74,7 +74,7 @@ class Dashboard extends React.Component {
     }
 }
 
-const mapStateToProps = (val) => {
+const mapStateToProps = (val : any) => {
     return { auth: val.auth };
 }
 

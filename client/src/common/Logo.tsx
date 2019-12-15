@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function Logo(props) {
+function Logo(props : any) {
 
     const text = <React.Fragment>
         <span style={{color: '#FF6F00'}}>Try</span>

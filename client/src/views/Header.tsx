@@ -5,7 +5,7 @@ import Logo from '../common/Logo';
 import TButton from 'components/TButton';
 import TotalScore from 'views/TotalScore';
 
-class Header extends React.Component {
+class Header extends React.Component<any> {
 
     renderContent() {
         switch(this.props.auth) {
@@ -20,7 +20,7 @@ class Header extends React.Component {
             default:
                 return (
                     <React.Fragment>
-                        <TotalScore score={this.props.auth.totalScore} />
+                        <TotalScore score={this.props.auth.totalScore as number} />
                         <span className="header-username" onClick={this.gotoProfile}>{this.props.auth.username}</span>
                         <TButton flat color="white" href="/api/logout">Logout</TButton>
                     </React.Fragment>
@@ -51,7 +51,7 @@ class Header extends React.Component {
     }
 }
 
-const mapStateToProps = (val) => {
+const mapStateToProps = (val : any) => {
     return { auth: val.auth };
 }
 

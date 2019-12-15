@@ -8,13 +8,14 @@ import TTextfield from 'components/TTextfield';
 
 const MAX_TIME = 120;
 
-class Explain extends React.Component {
+class Explain extends React.Component<any, any> {
     state = {
         loaded: false,
         error: null,
         assignment: null,
         content: '',
         allowed: true,
+        timer: null,
         time: MAX_TIME
     }
 
@@ -25,7 +26,7 @@ class Explain extends React.Component {
     next = async () => {
         try {
             if (this.state.timer) {
-                clearInterval(this.state.timer);
+                clearInterval(this.state.timer as unknown as number);
             }
             const response = await axios.get(`/api/assignments/${this.props.auth.language}`);
             this.setState({ loaded: true, assignment: response.data, content: '', time: MAX_TIME }, this.startTimer);
@@ -43,11 +44,13 @@ class Explain extends React.Component {
     }
 
     sendAnswer = async () => {
-        clearInterval(this.state.timer);
+        const timer = this.state.timer as unknown as number;
+        const assignment = this.state.assignment as any;
+        clearInterval(timer);
         const dto = {
             answer: this.state.content,
-            word_id: this.state.assignment.word.id,
-            language: this.state.assignment.language
+            word_id: assignment.word.id,
+            language: assignment.language
         }
         const response = await axios.post(`/api/assignments/${this.props.match.params.assignmentType}`, dto);
         if (response) {
@@ -58,8 +61,9 @@ class Explain extends React.Component {
 
     }
 
-    change = (word) => {
-        const wantedWord = this.state.assignment.word[this.state.assignment.language];
+    change = (word : any) => {
+        const assignment = this.state.assignment as any;
+        const wantedWord = assignment.word[assignment.language];
 
         const cheat = word
             .trim(' ')
@@ -72,7 +76,7 @@ class Explain extends React.Component {
         this.setState({ content: word, allowed })
     }
 
-    onKeyDown = (event) => {
+    onKeyDown = (event : any) => {
         // 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -92,7 +96,8 @@ class Explain extends React.Component {
             )
         }
 
-        if (!this.state.loaded) {
+        const assignment = this.state.assignment as any | null;
+        if (!this.state.loaded || this.state.assignment == null) {
             return (
                 <div style={{ width: '500px' }} className="explain-view">
                     <h2>Explain</h2>
@@ -108,14 +113,14 @@ class Explain extends React.Component {
                         Try to explain...
                     </div>
                     <div className="word-to-explain">
-                        {this.state.assignment.word.word}
+                        {assignment.word.word}
                     </div>
                 </div>
                 <div style={{ marginTop: '50px' }}>
                     <TTextfield
                         rows={6}
                         value={this.state.content}
-                        onChange={event => this.change(event.target.value)}
+                        onChange={(event : any) => this.change(event.target.value)}
                         onKeyDown={this.onKeyDown}
                         maxLength={400}
                         autoFocus
@@ -143,7 +148,7 @@ class Explain extends React.Component {
     }
 }
 
-const mapStateToProps = (val) => {
+const mapStateToProps = (val : any) => {
     return { auth: val.auth };
 }
 

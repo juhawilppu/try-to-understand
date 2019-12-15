@@ -1,11 +1,14 @@
 import * as React from 'react';
 
-class TotalScore extends React.Component {
+interface Props {
+    score: number;
+}
+class TotalScore extends React.Component<Props> {
     state = {
         score: null
     }
 
-    static getDerivedStateFromProps = props => {
+    static getDerivedStateFromProps = (props : Props) => {
         return { score: props.score }
     }
 

@@ -1,6 +1,15 @@
 import React from 'react';
 
-const TButton = props => {
+interface TButtonProps {
+    type?: string;
+    flat?: boolean;
+    secondary?: boolean;
+    color?: any;
+    onClick?: any;
+    href?: any;
+    children?: any;
+}
+const TButton = (props : TButtonProps) => {
 
     let type = 'primary';
     if (props.flat) {

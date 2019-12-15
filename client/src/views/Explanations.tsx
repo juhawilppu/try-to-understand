@@ -2,7 +2,7 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import TButton from 'components/TButton';
 
-class Explanations extends React.Component {
+class Explanations extends React.Component<any, any> {
     
     gotoExplain = () => {
         this.props.history.push('/explain');
@@ -24,9 +24,9 @@ class Explanations extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.props.explanations.map((exp) => {
+                {this.props.explanations.map((exp : any) => {
                     const guesses = exp.Guesses.length;
-                    const correct = exp.Guesses.filter(g => g.correct).length;
+                    const correct = exp.Guesses.filter((guess : any) => guess.correct).length;
                     return (
                         <tr key={exp.id}>
                             <td>{exp.Word.word}</td>
