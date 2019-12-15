@@ -31,7 +31,7 @@ npm install
 npm run dev
 ```
 
-The app should now be running on [localhost:5000](http://localhost:5000/).
+The app should now be running on [localhost:3000](http://localhost:3000/).
 
 ## How to configure Google OAuth 2.0
 Got to [https://console.developers.google.com](https://console.developers.google.com) .
