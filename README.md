@@ -1,6 +1,12 @@
 # TryToUnderstand
 
-Language learning platform where you explain words (in written) and try to guess what other have explained. Gain points by successful guesses.
+Language learning platform where you explain words (in writing) and try to guess what other have explained. Gain points with each successful guess by you or others.
+
+## Architecture
+
+Built using React, NodeJS and PostgreSQL. Frontend uses TypeScript but backend doesn't (yet). Uses Google OAuth 2.0 for authentication.
+
+Deployed as a NodeJS service where the compiled frontend code is baked in and served using express. Contains scripts for Google App Engine and Heroku deployment. Deployment expects to have a remote PostgreSQL running somewhere.
 
 ## How to run locally
 
