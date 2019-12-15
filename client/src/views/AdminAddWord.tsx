@@ -14,7 +14,8 @@ interface State {
 }
 class AdminAddWord extends React.Component<Props, State> {
     state = {
-        english: ''
+        english: '',
+        swedish: ''
     }
 
     saveWord = async () => {
