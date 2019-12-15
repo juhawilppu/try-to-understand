@@ -1,7 +1,6 @@
 set -e
 
-
-# not sure if necessary?
+# Build frontend because production mode will use it
 cd client
 npm run build
 cd ..
