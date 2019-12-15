@@ -1,8 +1,25 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { RouteComponentProps } from "react-router-dom";
 
-class Leaderboards extends React.Component<any, any> {
+interface Row {
+    username: string;
+    explains_correct: number;
+    explains_all: number;
+    guesses_correct: number;
+    guesses_all: number;
+    total_score: number;
+}
+
+interface Props extends RouteComponentProps {
+
+}
+interface State {
+    loaded: boolean;
+    rows: Row[];
+}
+class Leaderboards extends React.Component<Props, State> {
     state = {
         loaded: false,
         rows: []
@@ -14,7 +31,7 @@ class Leaderboards extends React.Component<any, any> {
         }).catch(error => alert(error));
     }
 
-    renderTable = (rows : any) => (
+    renderTable = (rows : Row[]) => (
         <table>
         <thead>
             <tr>
@@ -26,7 +43,7 @@ class Leaderboards extends React.Component<any, any> {
             </tr>
         </thead>
         <tbody>
-            {rows.map((row : any, index : number) => 
+            {rows.map((row, index : number) => 
                 <tr key={row.username}>
                     <td>{index+1}</td>
                     <td>{row.username}</td>
