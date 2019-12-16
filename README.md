@@ -10,7 +10,10 @@ Deployed as a NodeJS service where the compiled frontend code is baked in and se
 
 ## How to run locally
 
-Create a file `config/dev.js` with the secrets (Google OAuth 2.0 configuration etc.). See example of format from `config/prod.js`.
+Make a copy of `config/dev.template.js` into `config/dev.js` and populate the missing secrets (Google OAuth 2.0 configuration).
+```
+cp config/dev.template.js config/dev.js
+```
 
 Start local PostgreSQL
 ```
