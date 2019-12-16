@@ -1,5 +1,7 @@
 # TryToUnderstand
 
+[![CircleCI](https://circleci.com/gh/juhawilppu/try-to-understand.svg?style=svg)](https://circleci.com/gh/juhawilppu/try-to-understand)
+
 Language learning platform where you explain words (in writing) and try to guess what other have explained. Gain points with each successful guess by you or others.
 
 ## Architecture
