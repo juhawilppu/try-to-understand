@@ -46,7 +46,7 @@ class UserProfile extends React.Component<any, any> {
     )
 
     percentage = (a : number, b : number) => {
-        if (b != 0) {
+        if (b !== 0) {
             return (a*100/b).toFixed(2) + ' %';
         } else {
             return '-';

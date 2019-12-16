@@ -21,7 +21,11 @@ class AdminAddWord extends React.Component<Props, State> {
     saveWord = async () => {
         try {
             const response = await axios.post('/api/words', this.state);
-            this.props.history.push(`/admin`);
+            if (response) {
+                this.props.history.push(`/admin`);
+            } else {
+                alert('Something went wrong - no response');                
+            }
         } catch (err) {
             alert('Something went wrong: ' + err);
         }
