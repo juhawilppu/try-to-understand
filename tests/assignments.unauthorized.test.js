@@ -12,7 +12,7 @@ afterEach(async () => {
     await page.close();
 })
 
-describe('When not logged in', async () => {
+describe('When not logged in', () => {
     beforeEach(async () => {
         await page.click('.product-name');
         await page.waitFor('h2');
@@ -21,15 +21,19 @@ describe('When not logged in', async () => {
     const actions = [
         {
             method: 'get',
-            path: '/api/orders/2019-01-01/2019-02-01'
+            path: '/api/assignments/me'
         },
         {
             method: 'get',
-            path: '/api/customers'
+            path: '/api/assignments/english'
+        },
+        {
+            method: 'post',
+            path: '/api/assignments/FREE_TEXT'
         }
     ];
     
-    test('Orders related actions are prohibited', async () => {
+    test('Assignment related actions are prohibited', async () => {
         const results = await page.execRequests(actions);
 
         for (let result of results) {
