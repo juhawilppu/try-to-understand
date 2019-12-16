@@ -45,7 +45,7 @@ require('./routes/leaderboardRoutes')(app, sequelize);
 
 require('./services/passportConfig')(app, sequelize);
 
-if (['production', 'CI'].includes(process.env.NODE_ENV)) {
+if (['production', 'ci'].includes(process.env.NODE_ENV)) {
     // Express will serve the client main.js etc.
     app.use(express.static('client/build'));
 
