@@ -38,8 +38,6 @@ module.exports = (app, sequelize) => {
                     }
                 })
 
-                console.log('finding existin for ' + profile._json.sub)
-
                 if (existingUser) {
                     // We already have saved this customer to db
                     done(null, existingUser);
@@ -51,7 +49,6 @@ module.exports = (app, sequelize) => {
                         language: 'english'
                     }).save();
 
-                    console.log('saved user with ' + profile._json.sub);
                     done(null, user);
                 }
             }
