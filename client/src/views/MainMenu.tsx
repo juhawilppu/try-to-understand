@@ -33,7 +33,7 @@ class MainMenu extends React.Component<any, any> {
                     {rows.map(rowOptions => (
                          <div className="block-list top">
                             {rowOptions.map(option => (
-                                <div key={option.header} className="t-block" onClick={() => this.props.history.push(option.link)}>
+                                <div key={option.header} className={`t-block ${option.header}`} onClick={() => this.props.history.push(option.link)}>
                                     <div className="block-header">{option.header}</div>
                                     <div className="block-description">{option.description}</div>
                                 </div>
