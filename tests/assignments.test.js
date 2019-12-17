@@ -24,11 +24,9 @@ describe('After clicking to Explain page', async () => {
         expect(text).toEqual("Explain");
     })
 
-    /*
     test('A random assignment is fetched from database', async () => {
         const wordToExplain = await page.getContentsOf('.word-to-explain');
-        expect(wordToExplain).toEqual("ok");
+        expect(wordToExplain.length > 0).toEqual(true);
     })
-    */
 
 });
