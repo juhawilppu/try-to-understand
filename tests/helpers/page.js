@@ -27,13 +27,19 @@ class TryToUnderstandPage {
 	}
 
 	async login() {
+
+		// Generate an access token
 		const { session, sig } = sessionFactory();
 
-		await this.page.setCookie({ name: 'session', value: session });
-		await this.page.setCookie({ name: 'session.sig', value: sig });
+		// Set the token as cookie
+		await this.page.setCookie({ name: 'express:sess', value: session });
+		await this.page.setCookie({ name: 'express:sess.sig', value: sig });
+
+		// Open page
 		await this.page.goto(baseUrl);
 	
-		await this.page.waitFor('a[href="/api/logout"]');
+		// User is logged in if total score is visible
+		await this.page.waitFor('.header-total-score');
 	}
 
 	async getContentsOf(selector) {
