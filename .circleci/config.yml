@@ -39,7 +39,7 @@ jobs:
       - run: ./migrate-dev-db.sh
       - run:
           name: starting node server
-          command: npm start && sleep 10
+          command: npm start && sleep 20
           background: true
 
       - run: npm test
