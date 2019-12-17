@@ -13,7 +13,7 @@ afterEach(async () => {
     await page.close();
 })
 
-describe('After clicking to Explain page', async () => {
+describe('After clicking to Explain page', () => {
     beforeEach(async () => {
         await page.click('.Explain');
         await page.waitFor('h2');
