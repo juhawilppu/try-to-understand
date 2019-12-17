@@ -1,4 +1,14 @@
+// Config file for sequelize-ci
+
 module.exports = {
+  "ci": {
+    "username": "postgres",
+    "password": "example",
+    "database": "postgres",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
   "development": {
     "username": "postgres",
     "password": "example",
