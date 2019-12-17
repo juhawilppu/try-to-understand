@@ -31,6 +31,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run: npm install -g sequelize-cli
       - run: ./migrate-dev-db.sh
 
       - run:
