@@ -25,7 +25,9 @@ describe('After clicking to Explain page', () => {
     })
 
     test('A random assignment is fetched from database', async () => {
+        console.log(await page.getContentsOf('html'))
         const wordToExplain = await page.getContentsOf('.word-to-explain');
+        console.log('wordToExplain', wordToExplain)
         expect(wordToExplain.length > 0).toEqual(true);
     })
 
