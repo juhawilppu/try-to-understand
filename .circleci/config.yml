@@ -35,8 +35,8 @@ jobs:
       - run: npm config set prefix ~/.local
       - run: PATH=~/.local/bin/:$PATH
       - run: npm install -g sequelize-cli
+      - run: mv migrations-ci/* migrations/
       - run: ./migrate-dev-db.sh
-
       - run:
           name: starting node server
           command: npm start && sleep 10
