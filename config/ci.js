@@ -8,6 +8,6 @@ module.exports = {
         host: '127.0.0.1',
         database: 'postgres',
         username: 'postgres',
-        password: 'circle-ci-test'
+        password: 'example'
     }
 }
